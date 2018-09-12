@@ -41,8 +41,5 @@ app.use('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
-//for loggin    
-app.use(logger('dev'));
-
 
 module.exports = app;
