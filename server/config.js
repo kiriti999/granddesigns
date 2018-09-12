@@ -1,6 +1,6 @@
 module.exports = {
   database:
-    'mongodb://arash:abc123@ds111638.mlab.com:11638/amazonowebapplication',
+  'mongodb://gdesign:12qwaszx@ds149252.mlab.com:49252/gdesign',
   port: 3030,
   secret: 'ArashYahaya2012312321'
 };
