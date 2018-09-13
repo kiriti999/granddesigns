@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "granddesigns3": {
+    "granddesigns": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/granddesigns3",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -50,18 +50,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "granddesigns3:build"
+            "browserTarget": "granddesigns:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "granddesigns3:build:production"
+              "browserTarget": "granddesigns:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "granddesigns3:build"
+            "browserTarget": "granddesigns:build"
           }
         },
         "test": {
@@ -95,7 +95,7 @@
         }
       }
     },
-    "granddesigns3-e2e": {
+    "granddesigns-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -103,11 +103,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "granddesigns3:serve"
+            "devServerTarget": "granddesigns:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "granddesigns3:serve:production"
+              "devServerTarget": "granddesigns:serve:production"
             }
           }
         },
@@ -123,5 +123,5 @@
       }
     }
   },
-  "defaultProject": "granddesigns3"
+  "defaultProject": "granddesigns"
 }
