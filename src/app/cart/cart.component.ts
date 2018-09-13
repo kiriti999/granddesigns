@@ -102,7 +102,7 @@ export class CartComponent implements OnInit {
     try {
       if (this.validate()) {
         this.handler.open({
-          name: 'Amazono',
+          name: 'Grand Designs',
           description: 'Checkout Payment',
           amount: this.cartTotal * 100,
           closed: () => {
