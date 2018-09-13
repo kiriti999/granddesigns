@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "start": "node server.js",
-    "postinstall": "ng build --aot --prod"
+    "postinstall": "ng build --aot --prod",
+    
   },
   "private": true,
   "dependencies": {
