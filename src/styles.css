@@ -1,7 +1,5 @@
-$main: #232f3e;
-
 .bg-main {
-  background-color:$main;
+  background-color:#232f3e;
 }
 
 a {
