@@ -7,8 +7,6 @@ const multerS3 = require('multer-s3');
 // const s3 = new aws.S3({ accessKeyId: "AKIAIBR5G5OP47EVSYJA", secretAccessKey: "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" });
 const s3 = new aws.S3({ accessKeyId: "AKIAJZXH35RNXQ2BPP7Q", secretAccessKey: "ydVNWedlU8bYL8/Om2AnCKKwH6oGthGe7XhOYk3W" });
 
-const faker = require('faker');
-
 const checkJWT = require('../middlewares/check-jwt');
 
 var upload = multer({
@@ -56,26 +54,5 @@ router.route('/products')
       message: 'Successfully Added the product'
     });
   });
-
-/* Just for testing */
-router.get('/faker/test',(req, res, next) => {
-  for (i = 0; i < 20; i++) {
-    let product = new Product();
-    product.category = "5a686728080eae201861616a";
-    product.owner = "5a66f19dc5f7401b2057e1a3";
-    product.image = faker.image.cats();
-    product.title = faker.commerce.productName();
-    product.description = faker.lorem.words();
-    product.price = faker.commerce.price();
-    product.save();
-  }
-
-  res.json({
-    message: "Successfully added 20 pictures"
-  });
-
-});
-
-
 
 module.exports = router;
