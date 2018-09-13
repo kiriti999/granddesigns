@@ -5,7 +5,7 @@ const aws = require('aws-sdk');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 // const s3 = new aws.S3({ accessKeyId: "AKIAIBR5G5OP47EVSYJA", secretAccessKey: "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" });
-const s3 = new aws.S3({ accessKeyId: "AKIAIYA2FQGXOOPKJAWA", secretAccessKey: "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" });
+const s3 = new aws.S3({ accessKeyId: "AKIAJZXH35RNXQ2BPP7Q", secretAccessKey: "ydVNWedlU8bYL8/Om2AnCKKwH6oGthGe7XhOYk3W" });
 
 const faker = require('faker');
 
@@ -14,7 +14,7 @@ const checkJWT = require('../middlewares/check-jwt');
 var upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'gdesign2',
+    bucket: 'gdesign',
     metadata: function (req, file, cb) {
       cb(null, {fieldName: file.fieldname});
     },
