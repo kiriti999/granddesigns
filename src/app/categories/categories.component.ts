@@ -22,7 +22,7 @@ export class CategoriesComponent implements OnInit {
   async ngOnInit() {
     try {
       const data = await this.rest.get(
-        environment.apiUrl+':3030/api/categories'
+        environment.apiUrl+'/api/categories'
       );
       data['success']
         ? (this.categories = data['categories'])
@@ -36,7 +36,7 @@ export class CategoriesComponent implements OnInit {
     this.btnDisabled = true;
     try {
       const data = await this.rest.post(
-        environment.apiUrl+':3030/api/categories',
+        environment.apiUrl+'/api/categories',
         { category: this.newCategory }
       );
       data['success']

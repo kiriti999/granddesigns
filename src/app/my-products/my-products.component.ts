@@ -17,7 +17,7 @@ export class MyProductsComponent implements OnInit {
   async ngOnInit() {
     try {
       const data = await this.rest.get(
-        environment.apiUrl+':3030/api/seller/products'
+        environment.apiUrl+'/api/seller/products'
       );
       data['success']
         ? (this.products = data['products'])

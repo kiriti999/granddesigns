@@ -63,7 +63,7 @@ export class CartComponent implements OnInit {
 
         try {
           const data = await this.rest.post(
-            environment.apiUrl+':3030/api/payment',
+            environment.apiUrl+'/api/payment',
             {
               totalPrice: this.cartTotal,
               products,

@@ -31,7 +31,7 @@ export class PostProductComponent implements OnInit {
   async ngOnInit() {
     try {
       const data = await this.rest.get(
-        environment.apiUrl+':3030/api/categories'
+        environment.apiUrl+'/api/categories'
       );
       data['success']
         ? (this.categories = data['categories'])
@@ -88,7 +88,7 @@ export class PostProductComponent implements OnInit {
           }
         }
         const data = await this.rest.post(
-          environment.apiUrl+':3030/api/seller/products',
+          environment.apiUrl+'/api/seller/products',
           form
         );
         data['success']

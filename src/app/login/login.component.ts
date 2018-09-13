@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     try {
       if (this.validate()) {
         const data = await this.rest.post(
-          environment.apiUrl+':3030/api/accounts/login',
+          environment.apiUrl+'/api/accounts/login',
           {
             email: this.email,
             password: this.password,
