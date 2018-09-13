@@ -14,7 +14,7 @@ const checkJWT = require('../middlewares/check-jwt');
 var upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'amazonowebapplication',
+    bucket: 'gdesign2',
     metadata: function (req, file, cb) {
       cb(null, {fieldName: file.fieldname});
     },
