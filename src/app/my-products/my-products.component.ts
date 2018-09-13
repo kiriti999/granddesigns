@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { environment } from '../../environments/environment';
 import { RestApiService } from '../rest-api.service';
 import { DataService } from '../data.service';
 
@@ -17,7 +17,7 @@ export class MyProductsComponent implements OnInit {
   async ngOnInit() {
     try {
       const data = await this.rest.get(
-        'http://localhost:3030/api/seller/products'
+        environment.apiUrl+':3030/api/seller/products'
       );
       data['success']
         ? (this.products = data['products'])

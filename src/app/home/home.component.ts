@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { RestApiService } from '../rest-api.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit() {
     try {
-      const data = await this.rest.get('http://localhost:3030/api/products');
+      const data = await this.rest.get(environment.apiUrl+':3030/api/products');
       data['success']
         ? (this.products = data['products'])
         : this.data.error('Could not fetch products.');

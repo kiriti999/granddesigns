@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { NavigationStart, Router } from '@angular/router';
-
+import { environment } from '../environments/environment';
 import { RestApiService } from './rest-api.service';
 
 @Injectable()
@@ -39,7 +39,7 @@ export class DataService {
     try {
       if (localStorage.getItem('token')) {
         const data = await this.rest.get(
-          'http://localhost:3030/api/accounts/profile',
+          environment.apiUrl+':3030/api/accounts/profile',
         );
         this.user = data['user'];
         console.log(this.user);

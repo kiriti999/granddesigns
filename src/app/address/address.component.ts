@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { environment } from '../../environments/environment';
 import { DataService } from '../data.service';
 import { RestApiService } from '../rest-api.service';
 
@@ -18,7 +18,7 @@ export class AddressComponent implements OnInit {
   async ngOnInit() {
     try {
       const data = await this.rest.get(
-        'http://localhost:3030/api/accounts/address'
+        environment.apiUrl+':3030/api/accounts/address'
       );
 
       if (
@@ -39,7 +39,7 @@ export class AddressComponent implements OnInit {
     this.btnDisabled = true;
     try {
       const res = await this.rest.post(
-        'http://localhost:3030/api/accounts/address',
+        environment.apiUrl+':3030/api/accounts/address',
         this.currentAddress
       );
 

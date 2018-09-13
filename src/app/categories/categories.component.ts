@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { environment } from '../../environments/environment';
 import { RestApiService } from '../rest-api.service';
 import { DataService } from '../data.service';
 
@@ -22,7 +22,7 @@ export class CategoriesComponent implements OnInit {
   async ngOnInit() {
     try {
       const data = await this.rest.get(
-        'http://localhost:3030/api/categories'
+        environment.apiUrl+':3030/api/categories'
       );
       data['success']
         ? (this.categories = data['categories'])
@@ -36,7 +36,7 @@ export class CategoriesComponent implements OnInit {
     this.btnDisabled = true;
     try {
       const data = await this.rest.post(
-        'http://localhost:3030/api/categories',
+        environment.apiUrl+':3030/api/categories',
         { category: this.newCategory }
       );
       data['success']

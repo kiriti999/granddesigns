@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { environment } from '../../environments/environment';
 import { RestApiService } from '../rest-api.service';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
@@ -55,7 +55,7 @@ export class RegistrationComponent implements OnInit {
     try {
       if (this.validate()) {
         const data = await this.rest.post(
-          'http://localhost:3030/api/accounts/signup',
+          environment.apiUrl+':3030/api/accounts/signup',
           {
             name: this.name,
             email: this.email,

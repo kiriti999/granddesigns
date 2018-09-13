@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { RestApiService } from '../rest-api.service';
 import { DataService } from '../data.service';
@@ -31,7 +31,7 @@ export class PostProductComponent implements OnInit {
   async ngOnInit() {
     try {
       const data = await this.rest.get(
-        'http://localhost:3030/api/categories'
+        environment.apiUrl+':3030/api/categories'
       );
       data['success']
         ? (this.categories = data['categories'])
@@ -88,7 +88,7 @@ export class PostProductComponent implements OnInit {
           }
         }
         const data = await this.rest.post(
-          'http://localhost:3030/api/seller/products',
+          environment.apiUrl+':3030/api/seller/products',
           form
         );
         data['success']
