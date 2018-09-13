@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
 import { RestApiService } from '../rest-api.service';
+import { environment } from '../../environments/environment.prod';
 
 @Component({
   selector: 'app-search',
@@ -44,8 +45,7 @@ export class SearchComponent implements OnInit {
     this.content = null;
     try {
       const data = await this.rest.get(
-        `http://environment.apiUrl+'/api/search?query=${this.query}&page=${this.page -
-          1}`,
+        environment.apiUrl+`/api/search?query=${this.query}&page=${this.page-1}`,
       );
       data['success']
         ? (this.content = data['content'])

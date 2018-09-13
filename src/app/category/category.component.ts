@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RestApiService } from '../rest-api.service';
 import { DataService } from '../data.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-category',
@@ -41,8 +42,7 @@ export class CategoryComponent implements OnInit {
     }
     try {
       const data = await this.rest.get(
-        `http://environment.apiUrl+'/api/categories/${this.categoryId}?page=${this
-          .page - 1}`,
+        environment.apiUrl+`/api/categories/${this.categoryId}?page=${this.page - 1}`,
       );
       data['success']
         ? (this.category = data)

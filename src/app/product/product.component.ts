@@ -29,7 +29,7 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(res => {
       this.rest
-        .get(`http://environment.apiUrl+'/api/product/${res['id']}`)
+        .get(environment.apiUrl+`/api/product/${res['id']}`)
         .then(data => {
           data['success']
             ? (this.product = data['product'])
