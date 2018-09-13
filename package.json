@@ -1,5 +1,5 @@
 {
-  "name": "granddesigns3",
+  "name": "granddesigns",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -12,12 +12,13 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/cli": "~6.0.7",
-    "@angular/compiler-cli": "^6.0.3",
-    "@angular/animations": "^6.0.3",
+    "@angular/cdk": "^6.4.2",
+    "@angular/cli": "~6.0.8",
     "@angular/common": "^6.0.3",
     "@angular/compiler": "^6.0.3",
+    "@angular/compiler-cli": "^6.0.3",
     "@angular/core": "^6.0.3",
+    "@angular/animations": "^6.0.3",
     "@angular/forms": "^6.0.3",
     "@angular/http": "^6.0.3",
     "@angular/platform-browser": "^6.0.3",
