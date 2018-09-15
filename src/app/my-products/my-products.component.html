@@ -34,8 +34,11 @@
               </h5>
             </div>
             <div class="col-2">
-              <h6 class="font-weight-bold text-danger">{{ product.price | currency }}</h6>
+              <h6 class="font-weight-bold text-danger">{{ product.price | currency : 'INR' }}</h6>
             </div>
+            <!-- <div class="col-2">
+              <h6 class="font-weight-bold text-danger">Edit</h6>
+            </div> -->
           </div>
           <hr>
         </div>
