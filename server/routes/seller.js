@@ -12,7 +12,7 @@ const checkJWT = require('../middlewares/check-jwt');
 var upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'gdesign2',
+    bucket: 'gdesign',
     metadata: function (req, file, cb) {
       cb(null, {fieldName: file.fieldname});
     },
