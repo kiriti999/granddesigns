@@ -30,7 +30,8 @@ export class MyProductsComponent implements OnInit {
   async deleteProduct(e) {
     try {
       const data = await this.rest.get(environment.apiUrl + `/api/seller/products/delete/?id=${e.target.id}`);
-      data['success'] ? this.products = (this.products.filter(e => e != (data['products'].id))) : this.data.error(data['message']);
+      data['success'] ? this.products = (this.products.filter(e => e._id != (data['products'].id))) : this.data.error(data['message']);
+      console.log('filtered ', this.products);
     } catch (error) {
       this.data.error(error['message']);
     }

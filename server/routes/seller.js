@@ -4,7 +4,6 @@ const Product = require('../models/product');
 const aws = require('aws-sdk');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
-// const s3 = new aws.S3({ accessKeyId: "AKIAIBR5G5OP47EVSYJA", secretAccessKey: "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" });
 const s3 = new aws.S3({ accessKeyId: "AKIAIA65I6AWJM6B23WQ", secretAccessKey: "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" });
 
 const checkJWT = require('../middlewares/check-jwt');
@@ -57,14 +56,14 @@ router.route('/products')
 
   router.route('/products/delete')
   .get(checkJWT, (req, res, next) => {
-    Product.findByIdAndRemove({ _id: req.query.id }, function (err, data) {
+    Product.findByIdAndRemove({ _id: req.query.id }, function (err, products) {
       if (err) {
         console.log('error deleting product ', err);
       } else {
         res.json({
           success: true,
-          product: data,
-          message: 'Successfully deleted the product'
+          products: products,
+          message: products !== null ? 'Successfully deleted the product' : 'Product not found'
         });
       }
     });
