@@ -28,7 +28,7 @@
                 <p>
                   <small>by {{ product.owner.name }}</small>
                 </p>
-                <p>{{ product.price | currency }}</p>
+                <p>{{ product.price | currency : 'INR' }}</p>
               </div>
               <div class="col-md-6">
                 <ngb-rating [(rate)]="product.averageRating" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
