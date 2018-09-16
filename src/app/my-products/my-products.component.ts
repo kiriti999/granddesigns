@@ -16,17 +16,24 @@ export class MyProductsComponent implements OnInit {
 
   async ngOnInit() {
     try {
-      const data = await this.rest.get(
-        environment.apiUrl+'/api/seller/products'
-      );
-      data['success']
-        ? (this.products = data['products'])
-        : this.data.error(data['message']);
+      const data = await this.rest.get(environment.apiUrl + '/api/seller/products');
+      data['success'] ? (this.products = data['products']) : this.data.error(data['message']);
     } catch (error) {
       this.data.error(error['message']);
     }
   }
 
-  
+  editProduct(e) {
+    console.log('edit   ', e.target.id);
+  }
+
+  async deleteProduct(e) {
+    try {
+      const data = await this.rest.get(environment.apiUrl + `/api/seller/products/delete/?id=${e.target.id}`);
+      data['success'] ? this.products = (this.products.filter(e => e != (data['products'].id))) : this.data.error(data['message']);
+    } catch (error) {
+      this.data.error(error['message']);
+    }
+  }
 
 }

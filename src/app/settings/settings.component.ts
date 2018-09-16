@@ -61,8 +61,7 @@ export class SettingsComponent implements OnInit {
     try {
       if (this.validate(this.currentSettings)) {
         const data = await this.rest.post(
-          environment.apiUrl+'/api/accounts/profile',
-          {
+          environment.apiUrl+'/api/accounts/profile',{
             name: this.currentSettings['name'],
             email: this.currentSettings['email'],
             password: this.currentSettings['newPwd'],

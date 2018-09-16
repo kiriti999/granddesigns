@@ -14,7 +14,7 @@ var upload = multer({
     s3: s3,
     bucket: 'gdesign',
     metadata: function (req, file, cb) {
-      cb(null, {fieldName: file.fieldname});
+      cb(null, { fieldName: file.fieldname });
     },
     key: function (req, file, cb) {
       cb(null, Date.now().toString())
@@ -53,6 +53,22 @@ router.route('/products')
       success: true,
       message: 'Successfully Added the product'
     });
+  });
+
+  router.route('/products/delete')
+  .get(checkJWT, (req, res, next) => {
+    Product.findByIdAndRemove({ _id: req.query.id }, function (err, data) {
+      if (err) {
+        console.log('error deleting product ', err);
+      } else {
+        res.json({
+          success: true,
+          product: data,
+          message: 'Successfully deleted the product'
+        });
+      }
+    });
+
   });
 
 module.exports = router;
