@@ -6,8 +6,6 @@
 
 # dependencies
 /node_modules
-server/node_modules
-server/packager-lock.json
 
 # IDEs and editors
 /.idea

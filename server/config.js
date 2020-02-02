@@ -2,5 +2,5 @@ module.exports = {
   database:
   'mongodb://gdesign:12qwaszx@ds149252.mlab.com:49252/gdesign',
   port: 3030,
-  secret: 'ArashYahaya2012312321'
+  secret: 'kiriti2020'
 };
