@@ -18,9 +18,155 @@
   font-size: 14px;
 }
 
-@media only screen and (max-width: "480px") {
-  .navmobile {
-    width: 70%;
-    display: flex;
+@mixin heder-text {
+  color: white;
+  font-size: 14px;
+  line-height: 15px;
+  font-weight: 700;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  .header-logo {
+    flex-basis: 20%;
+    svg {
+      cursor: pointer;
+    }
+  }
+  .header-search-bar {
+    align-self: center;
+    flex-basis: 40%;
+  }
+
+  .header-categories {
+    align-self: center;
+    a {
+      @include heder-text();
+    }
+    a:hover {
+      border: solid 1px white;
+    }
+  }
+
+  .header-account-drop-down {
+    // position: relative;
+    // display: flex;
+    // justify-content: space-between;
+
+    ul.drop-menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    ul li {
+      display: none;
+      list-style: none;
+    }
+    // ul:hover {
+    //     color: #000;
+    // }
+  }
+
+  .dropbtn {
+    border: none;
+    height: 50px;
+    @include heder-text();
+  }
+
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {
+    border: solid 1px white;
+  }
+
+  .header-cart {
+    align-self: center;
+    a {
+      @include heder-text();
+    }
+    a:hover {
+      border: solid 1px white;
+    }
+  }
+  .mobile-links {
+    display: none;
+    a {
+      color: white;
+    }
   }
 }
+
+@media only screen and (max-width: "480px") {
+  .header {
+    .header-logo {
+      flex-basis: 80%;
+    }
+    .icon {
+      color: white;
+      padding: 10px 16px;
+      text-decoration: none;
+      font-size: 17px;
+      display: flex;
+      align-items: flex-end;
+      flex-direction: column;
+    }
+
+    .mobile-links {
+      text-align: end;
+      a {
+        padding: 14px 0px;
+        text-decoration: none;
+        font-size: 17px;
+        display: block;
+      }
+    }
+  }
+
+  .header-search-bar,
+  .header-categories,
+  .header-account-drop-down,
+  .header-cart {
+    display: none;
+  }
+}
+
+
+
+

@@ -41,4 +41,13 @@ export class AppComponent {
       this.router.navigate(['search', { query: this.searchTerm }]);
     }
   }
+
+  openMobileMenu() {
+    const x = document.getElementById('mobile-links');
+    if (x.style.display === 'block') {
+      x.style.display = 'none';
+    } else {
+      x.style.display = 'block';
+    }
+  }
 }
