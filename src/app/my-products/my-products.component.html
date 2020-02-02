@@ -27,20 +27,21 @@
             </div>
             <div class="col-5 col-md-8">
               <h5>
-                <a routerLink="/product/{{ product.id }}">{{ product.title }}</a>
+                <a routerLink="/product/{{ product.id }}">{{ product.title || "" }}</a>
                 <p class="m-0">
                   <small class="text-muted">{{ product.category.name }}</small>
                 </p>
               </h5>
             </div>
             <div class="col-2">
-              <h6 class="font-weight-bold text-danger" >{{ product.price | currency : 'INR' }}</h6>
+              <h6 class="font-weight-bold text-danger">{{ product.price | currency : 'INR' }}</h6>
             </div>
             <div class="col-2">
-              <button type="button" class="btn btn-info" id="{{product.id}}" (click)="editProduct($event)" [disabled]="btnDisabled">Edit</button>
+              <button type="button" class="btn btn-info" id="{{product.id}}" (click)="editProduct($event)">Edit</button>
             </div>
             <div class="col-2">
-              <button type="button" class="btn btn-info" id="{{product.id}}" (click)="deleteProduct($event)" [disabled]="btnDisabled">Delete</button>
+              <button type="button" class="btn btn-info" id="{{product.id}}"
+                (click)="deleteProduct($event)">Delete</button>
             </div>
           </div>
           <hr>

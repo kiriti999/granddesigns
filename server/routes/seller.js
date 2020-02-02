@@ -1,24 +1,12 @@
 const router = require('express').Router();
 const Product = require('../models/product');
-
-const aws = require('aws-sdk');
-const multer = require('multer');
-const multerS3 = require('multer-s3');
-const s3 = new aws.S3({ accessKeyId: "AKIAIA65I6AWJM6B23WQ", secretAccessKey: "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" });
-
 const checkJWT = require('../middlewares/check-jwt');
+const cloudinary = require('cloudinary');
 
-var upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: 'gdesign',
-    metadata: function (req, file, cb) {
-      cb(null, { fieldName: file.fieldname });
-    },
-    key: function (req, file, cb) {
-      cb(null, Date.now().toString())
-    }
-  })
+cloudinary.config({
+  cloud_name: 'gdesigns',
+  api_key: '429854764125427',
+  api_secret: 'PxEdUKCLC9Shs-DJbMWUEmZGC-s'
 });
 
 
@@ -37,24 +25,44 @@ router.route('/products')
         }
       });
   })
-  .post([checkJWT, upload.single('product_picture')], (req, res, next) => {
-    console.log(upload);
-    console.log(req.file);
-    let product = new Product();
-    product.owner = req.decoded.user._id;
-    product.category = req.body.categoryId;
-    product.title = req.body.title;
-    product.price = req.body.price;
-    product.description = req.body.description;
-    product.image = req.file.location;
-    product.save();
-    res.json({
-      success: true,
-      message: 'Successfully Added the product'
+  .post(checkJWT, (req, res, next) => {
+    console.log('req.body ', req.body);
+    console.log('-----------------------');
+
+
+    cloudinary.v2.uploader.upload(req.body.product_picture, function (error, result) {
+      try {
+        if (error) {
+          throw error;
+        }
+        console.log('cloudinary result ', result);
+        let product = new Product();
+        product.owner = req.decoded.user._id;
+        product.category = req.body.categoryId;
+        product.title = req.body.title;
+        product.price = req.body.price;
+        product.description = req.body.description;
+        product.image_name = req.body.product_image_name;
+        product.image = result.url;
+        // product.image = result.secure_url;
+        product.save();
+        res.json({
+          success: true,
+          message: 'Successfully Added the product'
+        });
+      } catch (err) {
+        res.json({
+          success: false,
+          message: 'Unable to save image to cloudinary'
+        })
+      }
+
+      console.log(result, error);
     });
+
   });
 
-  router.route('/products/delete')
+router.route('/products/delete')
   .get(checkJWT, (req, res, next) => {
     Product.findByIdAndRemove({ _id: req.query.id }, function (err, products) {
       if (err) {

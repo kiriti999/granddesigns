@@ -16,7 +16,8 @@ export class PostProductComponent implements OnInit {
     price: 0,
     categoryId: '',
     description: '',
-    product_picture: null
+    product_picture: null,
+    product_image_name: ''
   };
 
   categories: any;
@@ -31,7 +32,7 @@ export class PostProductComponent implements OnInit {
   async ngOnInit() {
     try {
       const data = await this.rest.get(
-        environment.apiUrl+'/api/categories'
+        environment.apiUrl + '/api/categories'
       );
       data['success']
         ? (this.categories = data['categories'])
@@ -66,30 +67,35 @@ export class PostProductComponent implements OnInit {
   }
 
   fileChange(event: any) {
-    this.product.product_picture = event.target.files[0];
+
+    console.log('File API supported.!');
+    const self = this;
+    const file = event.target.files[0];
+
+    // const fileSize = (file.size / 1024).toFixed(2);
+    // if (file && parseInt(fileSize, 10) < 400) {
+    const reader = new FileReader();
+
+    reader.onloadend = function (e: any) {
+      self.product.product_picture = e.target.result;
+      self.product.product_image_name = file.name;
+    };
+
+    reader.readAsDataURL(file);
+    // } else {
+    //   alert('File size too large OR No file');
+    // }
+
   }
 
   async post() {
     this.btnDisabled = true;
     try {
       if (this.validate(this.product)) {
-        const form = new FormData();
-        for (const key in this.product) {
-          if (this.product.hasOwnProperty(key)) {
-            if (key === 'product_picture') {
-              form.append(
-                'product_picture',
-                this.product.product_picture,
-                this.product.product_picture.name
-              );
-            } else {
-              form.append(key, this.product[key]);
-            }
-          }
-        }
+        console.log('product ', this.product);
         const data = await this.rest.post(
-          environment.apiUrl+'/api/seller/products',
-          form
+          environment.apiUrl + '/api/seller/products',
+          this.product
         );
         data['success']
           ? this.router.navigate(['/profile/myproducts'])

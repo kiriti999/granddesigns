@@ -11,11 +11,11 @@ import { environment } from '../../environments/environment';
 export class HomeComponent implements OnInit {
   products: any;
 
-  constructor(private data: DataService, private rest: RestApiService) {}
+  constructor(private data: DataService, private rest: RestApiService) { }
 
   async ngOnInit() {
     try {
-      const data = await this.rest.get(environment.apiUrl+'/api/products');
+      const data = await this.rest.get(environment.apiUrl + '/api/products');
       data['success']
         ? (this.products = data['products'])
         : this.data.error('Could not fetch products.');

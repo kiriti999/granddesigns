@@ -42,6 +42,7 @@ router.post('/signup', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
+  console.log('login called on server');
 
   User.findOne({ email: req.body.email }, (err, user) => {
     if (err) throw err;
@@ -125,7 +126,7 @@ router.route('/profile')
       if (req.body.state) user.address.state = req.body.state;
       if (req.body.country) user.address.country = req.body.country;
       if (req.body.postalCode) user.address.postalCode = req.body.postalCode;
-     
+
       user.save();
       res.json({
         success: true,

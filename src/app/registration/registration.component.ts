@@ -22,9 +22,9 @@ export class RegistrationComponent implements OnInit {
     private router: Router,
     private data: DataService,
     private rest: RestApiService,
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   validate() {
     if (this.name) {
@@ -55,7 +55,7 @@ export class RegistrationComponent implements OnInit {
     try {
       if (this.validate()) {
         const data = await this.rest.post(
-          environment.apiUrl+'/api/accounts/signup',
+          environment.apiUrl + '/api/accounts/signup',
           {
             name: this.name,
             email: this.email,

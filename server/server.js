@@ -16,6 +16,7 @@ mongoose.connect(config.database, {useMongoClient: true}, err => {
   if (err) {
     console.log(err);
   } else {
+    console.log('app port', app.get('port'));
     console.log('Connected to the database');
   }
 });

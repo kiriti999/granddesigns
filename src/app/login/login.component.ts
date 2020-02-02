@@ -19,9 +19,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private rest: RestApiService,
     private data: DataService,
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   validate() {
     if (this.email) {
@@ -36,11 +36,12 @@ export class LoginComponent implements OnInit {
   }
 
   async login() {
+    console.log('login called');
     this.btnDisabled = true;
     try {
       if (this.validate()) {
         const data = await this.rest.post(
-          environment.apiUrl+'/api/accounts/login',
+          environment.apiUrl + '/api/accounts/login',
           {
             email: this.email,
             password: this.password,
