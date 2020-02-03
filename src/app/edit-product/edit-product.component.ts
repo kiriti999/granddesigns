@@ -107,8 +107,8 @@ export class EditProductComponent implements OnInit {
     const reader = new FileReader();
 
     reader.onloadend = function (e: any) {
-      self.product.product_picture = e.target.result;
-      self.product.product_image_name = file.name;
+      self.editProduct.product_picture = e.target.result;
+      self.editProduct.product_image_name = file.name;
     };
 
     reader.readAsDataURL(file);
