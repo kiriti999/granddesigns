@@ -48,7 +48,7 @@ export class CartComponent implements OnInit {
       this.quantities.push(1);
     });
     this.handler = StripeCheckout.configure({
-      key: environment.stripeKey,
+      // key: environment.stripeKey,
       image: 'assets/img/logo.png',
       locale: 'auto',
       token: async stripeToken => {
@@ -63,7 +63,7 @@ export class CartComponent implements OnInit {
 
         try {
           const data = await this.rest.post(
-            environment.apiUrl+'/api/payment',
+            environment.apiUrl + '/api/payment',
             {
               totalPrice: this.cartTotal,
               products,
