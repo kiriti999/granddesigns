@@ -67,7 +67,7 @@ export class MyProductsComponent implements OnInit {
     try {
       const data = await this.rest.get(environment.apiUrl + `/api/seller/products/getById/?id=${e.target.id}`);
       console.log('data ', data);
-      data['success'] ? this.products = (this.products.filter(e => e._id != (data['products'].id))) : this.data.error(data['message']);
+      data['success'] ? (this.products = data['products']) : this.data.error(data['message']);
       console.log('filtered ', this.products);
     } catch (error) {
       this.data.error(error['message']);
