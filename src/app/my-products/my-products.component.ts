@@ -60,15 +60,12 @@ export class MyProductsComponent implements OnInit {
   }
 
   async getById(e) {
-    console.log('getById   ', e.target.id);
-    this.editOnlyMode = true;
-    this.readOnlyMode = false;
-
     try {
       const data = await this.rest.get(environment.apiUrl + `/api/seller/products/getById/?id=${e.target.id}`);
-      console.log('data ', data);
+      console.log('getById ', data);
       data['success'] ? (this.products = data['products']) : this.data.error(data['message']);
-      console.log('filtered ', this.products);
+      this.editOnlyMode = true;
+      this.readOnlyMode = false;
     } catch (error) {
       this.data.error(error['message']);
     }
