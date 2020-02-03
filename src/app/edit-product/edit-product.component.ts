@@ -3,7 +3,6 @@ import { environment } from 'src/environments/environment';
 import { DataService } from '../data.service';
 import { RestApiService } from '../rest-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-product',
@@ -35,7 +34,6 @@ export class EditProductComponent implements OnInit {
     product_picture: null,
     product_image_name: ''
   };
-  state$: Observable<object>;
 
   constructor(private data: DataService, private rest: RestApiService, private router: Router, private dataRoute: ActivatedRoute) { }
 

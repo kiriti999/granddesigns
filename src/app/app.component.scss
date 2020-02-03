@@ -125,15 +125,16 @@
       border: solid 1px white;
     }
   }
-  .mobile-links {
-    display: none;
-    a {
-      color: white;
-    }
+}
+
+.mobile-links {
+  display: none;
+  a {
+    color: white;
   }
-  .my-hamburger {
-    display: none;
-  }
+}
+.my-hamburger {
+  display: none;
 }
 
 @media only screen and (max-width: "480px") {
