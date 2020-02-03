@@ -58,26 +58,26 @@
     </a>
   </div>
 
-  <div href="javascript:void(0);" class="icon" (click)="openMobileMenu()">
-    <i class="fa fa-bars"></i>
+</div>
 
-    <div class="mobile-links" id='mobile-links'>
-      <a class="header-search-bar">
-        <div class="input-group">
-          <input type="text" name="search" class="form-control" [(ngModel)]="searchTerm" (keyup.enter)="search()">
-          <span id="searchBtn" class="bg-warning" (click)="search()">
-            <i class="fa fa-search"></i>
-          </span>
-        </div>
-      </a>
-      <a (click)="collapse()" routerLink="/categories" routerLinkActive="active" class="nav-link">Categories</a>
-      <a (click)="collapse()" routerLink="/cart" routerLinkActive="active" class="nav-link">
-        <i class="fa fa-shopping-cart mr-1"></i>Cart
-        <span *ngIf="data.cartItems" class="badge badge-warning ml-1">{{ data.cartItems }}</span>
-      </a>
-    </div>
+<div href="javascript:void(0);" class="icon" (click)="openMobileMenu()">
+  <i class="fa fa-bars my-hamburger"></i>
+
+  <div class="mobile-links" id='mobile-links'>
+    <a class="header-search-bar">
+      <div class="input-group">
+        <input type="text" name="search" class="form-control" [(ngModel)]="searchTerm" (keyup.enter)="search()">
+        <span id="searchBtn" class="bg-warning" (click)="search()">
+          <i class="fa fa-search"></i>
+        </span>
+      </div>
+    </a>
+    <a (click)="collapse()" routerLink="/categories" routerLinkActive="active" class="nav-link">Categories</a>
+    <a (click)="collapse()" routerLink="/cart" routerLinkActive="active" class="nav-link">
+      <i class="fa fa-shopping-cart mr-1"></i>Cart
+      <span *ngIf="data.cartItems" class="badge badge-warning ml-1">{{ data.cartItems }}</span>
+    </a>
   </div>
-
 </div>
 
 

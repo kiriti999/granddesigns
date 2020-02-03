@@ -147,16 +147,6 @@
       align-items: flex-end;
       flex-direction: column;
     }
-
-    .mobile-links {
-      text-align: end;
-      a {
-        padding: 14px 0px;
-        text-decoration: none;
-        font-size: 17px;
-        display: block;
-      }
-    }
   }
 
   .header-search-bar,
@@ -165,8 +155,24 @@
   .header-cart {
     display: none;
   }
+
+  .mobile-links {
+    display: none;
+    background: dimgrey;
+    text-align: end;
+    a {
+      padding: 14px 6px;
+      text-decoration: none;
+      font-size: 17px;
+      display: block;
+      color: white;
+    }
+  }
+  .my-hamburger {
+    position: absolute;
+    right: 0;
+    top: 13px;
+    color: white;
+    padding: 0 15px;
+  }
 }
-
-
-
-
