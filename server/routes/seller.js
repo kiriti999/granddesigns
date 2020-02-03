@@ -77,48 +77,62 @@ router.route('/products/getById')
   });
 
 
-  router.route('/products/edit')
+router.route('/products/edit')
   .post(checkJWT, (req, res, next) => {
     console.log('edit ', req.body);
 
-    cloudinary.v2.uploader.upload(req.body.product_picture, function (error, result) {
-      try {
-        if (error) {
-          throw error;
-        }
-        console.log('cloudinary edit result ', result);
-
-        const editProduct = {
-          image: result.url,
-          description: req.body.description,
-          price: req.body.price,
-          title: req.body.title,
-          category: req.body.category,
-          owner: req.body.owner,
-          created: req.body.crated,
-          reviews: req.body.reviews,
-          id: req.body.id
-        }
-
-        Product.findByIdAndUpdate(req.body.id, editProduct, {new: true}, function (err, products) {
-          if (err) {
-            console.log('error editing product ', err);
-          } else {
-            res.json({
-              success: true,
-              products: products,
-              message: products !== null ? 'Successfully edited the product' : 'Product not found'
-            });
+    if (Buffer.from(str, 'base64').toString('base64') === str) {
+      cloudinary.v2.uploader.upload(req.body.product_picture, function (error, result) {
+        try {
+          if (error) {
+            throw error;
           }
-        });
-      } catch (err) {
-        res.json({
-          success: false,
-          message: 'Unable to save image to cloudinary'
-        })
-      }
-      console.log(result, error);
-    });
+          console.log('cloudinary edit result ', result);
+
+          const editProduct = {
+            image: result.url,
+            description: req.body.description,
+            price: req.body.price,
+            title: req.body.title,
+            category: req.body.category,
+            owner: req.body.owner,
+            created: req.body.crated,
+            reviews: req.body.reviews,
+            id: req.body.id
+          }
+
+          Product.findByIdAndUpdate(req.body.id, editProduct, { new: true }, function (err, products) {
+            if (err) {
+              console.log('error editing product ', err);
+            } else {
+              res.json({
+                success: true,
+                products: products,
+                message: products !== null ? 'Successfully edited the product' : 'Product not found'
+              });
+            }
+          });
+        } catch (err) {
+          res.json({
+            success: false,
+            message: 'Unable to save image to cloudinary'
+          })
+        }
+        console.log(result, error);
+      });
+    } else {
+      Product.findByIdAndUpdate(req.body.id, req.body, { new: true }, function (err, products) {
+        if (err) {
+          console.log('error editing product ', err);
+        } else {
+          res.json({
+            success: true,
+            products: products,
+            message: products !== null ? 'Successfully edited the product' : 'Product not found'
+          });
+        }
+      });
+    }
 
   });
 
