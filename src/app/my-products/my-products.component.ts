@@ -62,11 +62,11 @@ export class MyProductsComponent implements OnInit {
   async getById(e) {
     try {
       const data = await this.rest.get(environment.apiUrl + `/api/seller/products/getById/?id=${e.target.id}`);
-      console.log('getById ', data);
+      console.log('getById ', [].push(data['products']));
       if (data['success']) {
-        (this.products = data['products']);
         this.editOnlyMode = true;
         this.readOnlyMode = false;
+        this.products = [].push(data['products']);
       } else {
         this.data.error(data['message']);
       }
@@ -105,13 +105,15 @@ export class MyProductsComponent implements OnInit {
       if (this.validate(product)) {
         console.log('product ', product);
         const data = await this.rest.post(environment.apiUrl + '/api/seller/products/edit', product);
-        data['success']
-          ? this.router.navigate(['/profile/myproducts'])
+        if (data['success']) {
+          this.router.navigate(['/profile/myproducts'])
             .then(() => this.data.success(data['message']))
-            .catch(error => this.data.error(error))
-          : this.data.error(data['message']);
-        this.editOnlyMode = false;
-        this.readOnlyMode = true;
+            .catch(error => this.data.error(error));
+          this.editOnlyMode = false;
+          this.readOnlyMode = true;
+        } else {
+          this.data.error(data['message']);
+        }
       }
     } catch (error) {
       this.data.error(error['message']);
