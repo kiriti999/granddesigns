@@ -76,6 +76,7 @@ export class MyProductsComponent implements OnInit {
         this.editOnlyMode = true;
         this.readOnlyMode = false;
         this.editProduct = data['products'];
+        // this.router.navigate(['/profile/myproducts/edit', { state: this.editProduct }]);
       } else {
         this.data.error(data['message']);
       }
@@ -111,9 +112,10 @@ export class MyProductsComponent implements OnInit {
         console.log('validate ', editProduct);
         const data = await this.rest.post(environment.apiUrl + '/api/seller/products/edit', editProduct);
         if (data['success']) {
-          this.router.navigate(['/profile/myproducts'])
-            .then(() => this.data.success(data['message']))
-            .catch(error => this.data.error(error));
+          this.products = data['products'];
+          // this.router.navigate(['/profile/myproducts'])
+          //   .then(() => this.data.success(data['message']))
+          //   .catch(error => this.data.error(error));
           this.editOnlyMode = false;
           this.readOnlyMode = true;
         } else {
