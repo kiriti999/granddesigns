@@ -29,7 +29,6 @@ router.route('/products')
     console.log('req.body ', req.body);
     console.log('-----------------------');
 
-
     cloudinary.v2.uploader.upload(req.body.product_picture, function (error, result) {
       try {
         if (error) {
@@ -66,12 +65,12 @@ router.route('/products/getById')
   .get(checkJWT, (req, res, next) => {
     Product.findById({ _id: req.query.id }, function (err, products) {
       if (err) {
-        console.log('error deleting product ', err);
+        console.log('error retrieving product byid ', err);
       } else {
         res.json({
           success: true,
           products: products,
-          message: products !== null ? 'Successfully deleted the product' : 'Product not found'
+          message: products !== null ? 'Successfully retrieved the product by id' : 'Product not found'
         });
       }
     });
@@ -79,8 +78,9 @@ router.route('/products/getById')
 
 
   router.route('/products/edit')
-  .get(checkJWT, (req, res, next) => {
-    Product.findByIdAndUpdate({ _id: req.query.id }, function (err, products) {
+  .post(checkJWT, (req, res, next) => {
+    console.log('edit ', req.body);
+    Product.findByIdAndUpdate(req.body.id, req.body, function (err, products) {
       if (err) {
         console.log('error editing product ', err);
       } else {

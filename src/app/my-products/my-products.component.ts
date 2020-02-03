@@ -26,6 +26,16 @@ export class MyProductsComponent implements OnInit {
     product_image_name: ''
   };
 
+  editProduct = {
+    _id: '',
+    title: '',
+    price: 0,
+    categoryId: '',
+    description: '',
+    product_picture: null,
+    product_image_name: ''
+  };
+
   constructor(private data: DataService, private rest: RestApiService, private router: Router) { }
 
   async ngOnInit() {
@@ -62,11 +72,11 @@ export class MyProductsComponent implements OnInit {
   async getById(e) {
     try {
       const data = await this.rest.get(environment.apiUrl + `/api/seller/products/getById/?id=${e.target.id}`);
-      console.log('getById ', [].push(data['products']));
+      console.log('getById ', data);
       if (data['success']) {
         this.editOnlyMode = true;
         this.readOnlyMode = false;
-        this.products = [].push(data['products']);
+        this.editProduct = data['products'];
       } else {
         this.data.error(data['message']);
       }
@@ -80,11 +90,7 @@ export class MyProductsComponent implements OnInit {
       if (product.price) {
         if (product.categoryId) {
           if (product.description) {
-            if (product.product_picture) {
-              return true;
-            } else {
-              this.data.error('Please select product image.');
-            }
+            return true;
           } else {
             this.data.error('Please enter description.');
           }
@@ -99,12 +105,12 @@ export class MyProductsComponent implements OnInit {
     }
   }
 
-  async postChanges(product) {
+  async postChanges(editProduct) {
     this.btnDisabled = true;
     try {
-      if (this.validate(product)) {
-        console.log('product ', product);
-        const data = await this.rest.post(environment.apiUrl + '/api/seller/products/edit', product);
+      if (this.validate(editProduct)) {
+        console.log('validate ', editProduct);
+        const data = await this.rest.post(environment.apiUrl + '/api/seller/products/edit', editProduct);
         if (data['success']) {
           this.router.navigate(['/profile/myproducts'])
             .then(() => this.data.success(data['message']))
@@ -119,6 +125,28 @@ export class MyProductsComponent implements OnInit {
       this.data.error(error['message']);
     }
     this.btnDisabled = false;
+  }
+
+  fileChange(event: any) {
+
+    console.log('File API supported.!');
+    const self = this;
+    const file = event.target.files[0];
+
+    // const fileSize = (file.size / 1024).toFixed(2);
+    // if (file && parseInt(fileSize, 10) < 400) {
+    const reader = new FileReader();
+
+    reader.onloadend = function (e: any) {
+      self.product.product_picture = e.target.result;
+      self.product.product_image_name = file.name;
+    };
+
+    reader.readAsDataURL(file);
+    // } else {
+    //   alert('File size too large OR No file');
+    // }
+
   }
 
 }

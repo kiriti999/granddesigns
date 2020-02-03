@@ -4,8 +4,6 @@ const algoliasearch = require('algoliasearch');
 const client = algoliasearch('CO3GNO6BHL', '3a4325e1bed03a2fa814393542dcbe61');
 const index = client.initIndex('amazonov1');
 
-
-
 router.get('/', (req, res, next) => {
   if (req.query.query) {
     index.search({
@@ -22,7 +20,6 @@ router.get('/', (req, res, next) => {
     });
   }
 });
-
 
 module.exports = router;
 

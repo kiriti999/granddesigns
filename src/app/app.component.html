@@ -33,16 +33,16 @@
     <div class="dropdown">
       <button class="dropbtn bg-main">Account</button>
       <div class="dropdown-content form-control">
-        <a *ngIf="token" (click)="closeDropdown(dropdown);collapse();" routerLink="/profile" class="dropdown-item">
+        <a *ngIf="token" routerLink="/profile" class="dropdown-item">
           <i class="fa fa-user-circle" aria-hidden="true"></i> Profile
         </a>
-        <a *ngIf="!token" (click)="closeDropdown(dropdown);collapse();" routerLink="/login" class="dropdown-item">
+        <a *ngIf="!token" routerLink="/login" class="dropdown-item">
           <i class="fa fa-key" aria-hidden="true"></i> Login
         </a>
-        <a *ngIf="token" (click)="closeDropdown(dropdown);collapse();logout();" class="dropdown-item">
+        <a *ngIf="token" (click)="logout();" class="dropdown-item">
           <i class="fa fa-key" aria-hidden="true"></i> Logout
         </a>
-        <a *ngIf="!token" (click)="closeDropdown(dropdown);collapse();" routerLink="/register" class="dropdown-item">
+        <a *ngIf="!token" routerLink="/register" class="dropdown-item">
           <i class="fa fa-group" aria-hidden="true"></i> Register
         </a>
       </div>
@@ -82,7 +82,6 @@
 
 
 <router-outlet></router-outlet>
-
 
 
 <footer id="main-footer" class="bg-main text-white mt-5 p-1">
