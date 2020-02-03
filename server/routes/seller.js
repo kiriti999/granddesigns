@@ -86,7 +86,7 @@ router.route('/products/getById')
       } else {
         res.json({
           success: true,
-          products: products,
+          products: [products],
           message: products !== null ? 'Successfully edited the product' : 'Product not found'
         });
       }
