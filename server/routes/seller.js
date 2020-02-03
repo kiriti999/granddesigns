@@ -80,7 +80,7 @@ router.route('/products/getById')
   router.route('/products/edit')
   .post(checkJWT, (req, res, next) => {
     console.log('edit ', req.body);
-    Product.findByIdAndUpdate(req.body.id, req.body, function (err, products) {
+    Product.findByIdAndUpdate(req.body.id, req.body, {new: true}, function (err, products) {
       if (err) {
         console.log('error editing product ', err);
       } else {
