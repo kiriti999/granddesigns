@@ -13,8 +13,8 @@ export class MyProductsComponent implements OnInit {
 
   products: any;
   categories: any;
-  readOnlyMode: boolean;
-  editOnlyMode: boolean;
+  readOnlyMode = true;
+  editOnlyMode = false;
   btnDisabled = false;
 
   product = {
@@ -29,8 +29,6 @@ export class MyProductsComponent implements OnInit {
   constructor(private data: DataService, private rest: RestApiService, private router: Router) { }
 
   async ngOnInit() {
-    this.readOnlyMode = true;
-    this.editOnlyMode = false;
     try {
       const data = await this.rest.get(
         environment.apiUrl + '/api/categories'
