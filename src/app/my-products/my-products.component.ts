@@ -63,9 +63,13 @@ export class MyProductsComponent implements OnInit {
     try {
       const data = await this.rest.get(environment.apiUrl + `/api/seller/products/getById/?id=${e.target.id}`);
       console.log('getById ', data);
-      data['success'] ? (this.products = data['products']) : this.data.error(data['message']);
-      this.editOnlyMode = true;
-      this.readOnlyMode = false;
+      if (data['success']) {
+        (this.products = data['products']);
+        this.editOnlyMode = true;
+        this.readOnlyMode = false;
+      } else {
+        this.data.error(data['message']);
+      }
     } catch (error) {
       this.data.error(error['message']);
     }
