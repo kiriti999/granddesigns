@@ -1,3 +1,4 @@
+import { EditProductComponent } from './edit-product/edit-product.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -75,6 +76,11 @@ const routes: Routes = [
   {
     path: 'profile/myproducts',
     component: MyProductsComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'profile/myproducts/edit',
+    component: EditProductComponent,
     canActivate: [AuthGuardService],
   },
   {

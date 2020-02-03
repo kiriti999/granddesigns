@@ -13,8 +13,6 @@ export class MyProductsComponent implements OnInit {
 
   products: any;
   categories: any;
-  readOnlyMode = true;
-  editOnlyMode = false;
   btnDisabled = false;
 
   product = {
@@ -26,29 +24,9 @@ export class MyProductsComponent implements OnInit {
     product_image_name: ''
   };
 
-  editProduct = {
-    title: '',
-    price: 0,
-    categoryId: '',
-    description: '',
-    product_picture: null,
-    product_image_name: ''
-  };
-
   constructor(private data: DataService, private rest: RestApiService, private router: Router) { }
 
   async ngOnInit() {
-    try {
-      const data = await this.rest.get(
-        environment.apiUrl + '/api/categories'
-      );
-      data['success']
-        ? (this.categories = data['categories'])
-        : this.data.error(data['message']);
-    } catch (error) {
-      this.data.error(error['message']);
-    }
-
     try {
       const data = await this.rest.get(environment.apiUrl + '/api/seller/products');
       console.log('data ', data);
@@ -73,10 +51,7 @@ export class MyProductsComponent implements OnInit {
       const data = await this.rest.get(environment.apiUrl + `/api/seller/products/getById/?id=${e.target.id}`);
       console.log('getById ', data);
       if (data['success']) {
-        this.editOnlyMode = true;
-        this.readOnlyMode = false;
-        this.editProduct = data['products'];
-        // this.router.navigate(['/profile/myproducts/edit', { state: this.editProduct }]);
+        this.router.navigate(['/profile/myproducts/edit', { state: JSON.stringify(data['products']) }]);
       } else {
         this.data.error(data['message']);
       }
@@ -84,70 +59,4 @@ export class MyProductsComponent implements OnInit {
       this.data.error(error['message']);
     }
   }
-
-  validate(product) {
-    if (product.title) {
-      if (product.price) {
-        if (product.categoryId) {
-          if (product.description) {
-            return true;
-          } else {
-            this.data.error('Please enter description.');
-          }
-        } else {
-          this.data.error('Please select category.');
-        }
-      } else {
-        this.data.error('Please enter a price.');
-      }
-    } else {
-      this.data.error('Please enter a title.');
-    }
-  }
-
-  async postChanges(editProduct) {
-    this.btnDisabled = true;
-    try {
-      if (this.validate(editProduct)) {
-        console.log('validate ', editProduct);
-        const data = await this.rest.post(environment.apiUrl + '/api/seller/products/edit', editProduct);
-        if (data['success']) {
-          this.products = data['products'];
-          // this.router.navigate(['/profile/myproducts'])
-          //   .then(() => this.data.success(data['message']))
-          //   .catch(error => this.data.error(error));
-          this.editOnlyMode = false;
-          this.readOnlyMode = true;
-        } else {
-          this.data.error(data['message']);
-        }
-      }
-    } catch (error) {
-      this.data.error(error['message']);
-    }
-    this.btnDisabled = false;
-  }
-
-  fileChange(event: any) {
-
-    console.log('File API supported.!');
-    const self = this;
-    const file = event.target.files[0];
-
-    // const fileSize = (file.size / 1024).toFixed(2);
-    // if (file && parseInt(fileSize, 10) < 400) {
-    const reader = new FileReader();
-
-    reader.onloadend = function (e: any) {
-      self.product.product_picture = e.target.result;
-      self.product.product_image_name = file.name;
-    };
-
-    reader.readAsDataURL(file);
-    // } else {
-    //   alert('File size too large OR No file');
-    // }
-
-  }
-
 }
