@@ -62,6 +62,38 @@ router.route('/products')
 
   });
 
+router.route('/products/getById')
+  .get(checkJWT, (req, res, next) => {
+    Product.findById({ _id: req.query.id }, function (err, products) {
+      if (err) {
+        console.log('error deleting product ', err);
+      } else {
+        res.json({
+          success: true,
+          products: products,
+          message: products !== null ? 'Successfully deleted the product' : 'Product not found'
+        });
+      }
+    });
+  });
+
+
+  router.route('/products/edit')
+  .get(checkJWT, (req, res, next) => {
+    Product.findByIdAndUpdate({ _id: req.query.id }, function (err, products) {
+      if (err) {
+        console.log('error editing product ', err);
+      } else {
+        res.json({
+          success: true,
+          products: products,
+          message: products !== null ? 'Successfully edited the product' : 'Product not found'
+        });
+      }
+    });
+  });
+
+
 router.route('/products/delete')
   .get(checkJWT, (req, res, next) => {
     Product.findByIdAndRemove({ _id: req.query.id }, function (err, products) {
@@ -75,7 +107,6 @@ router.route('/products/delete')
         });
       }
     });
-
   });
 
 module.exports = router;
