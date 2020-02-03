@@ -27,7 +27,6 @@ export class MyProductsComponent implements OnInit {
   };
 
   editProduct = {
-    _id: '',
     title: '',
     price: 0,
     categoryId: '',
