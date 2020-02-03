@@ -161,7 +161,6 @@
   }
 
   .mobile-links {
-    display: none;
     background: dimgrey;
     text-align: end;
     a {
@@ -173,6 +172,7 @@
     }
   }
   .my-hamburger {
+    display: block;
     position: absolute;
     right: 0;
     top: 13px;
