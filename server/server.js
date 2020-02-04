@@ -8,11 +8,12 @@ const cors = require('cors');
 const config = require('./config');
 
 const app = express();
-app.set('port', process.env.PORT  || config.port); // Set port to 3000 or the provided PORT variable
+app.use(express.bodyParser({ limit: '50mb' }));
+app.set('port', process.env.PORT || config.port); // Set port to 3000 or the provided PORT variable
 // to connect to mogo database
 
 // Only include useMongoClient only if your mongoose version is < 5.0.0
-mongoose.connect(config.database, {useMongoClient: true}, err => {
+mongoose.connect(config.database, { useMongoClient: true }, err => {
   if (err) {
     console.log(err);
   } else {

@@ -182,7 +182,6 @@
 
   /* The subnavigation menu */
   .subnav {
-    float: left;
     overflow: hidden;
   }
 
@@ -196,5 +195,25 @@
     background-color: inherit;
     font-family: inherit;
     margin: 0;
+  }
+  /* Style the subnav content - positioned absolute */
+  .subnav-content {
+    display: none;
+    position: absolute;
+    // left: 0;
+    background-color: red;
+    width: 100%;
+    z-index: 1;
+  }
+
+  /* Style the subnav links */
+  .subnav-content a {
+    color: white;
+    text-decoration: none;
+  }
+
+  /* When you move the mouse over the subnav container, open the subnav content */
+  .subnav:hover .subnav-content {
+    display: block;
   }
 }

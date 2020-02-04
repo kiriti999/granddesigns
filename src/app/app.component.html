@@ -78,8 +78,8 @@
 
     <!-- Account dropdown  -->
     <div class="subnav">
-      <button class="subnavbtn">Account <i class="fa fa-caret-down"></i></button>
-      <div class="subnav-content">
+      <button class="subnavbtn" (click)='openSubNav()'>Account <i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content" id='subnav-content'>
         <a *ngIf="token" routerLink="/profile" class="dropdown-item">
           <i class="fa fa-user-circle" aria-hidden="true"></i> Profile
         </a>
