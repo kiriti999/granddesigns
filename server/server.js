@@ -8,7 +8,7 @@ const cors = require('cors');
 const config = require('./config');
 
 const app = express();
-app.use(express.bodyParser({ limit: '50mb' }));
+app.use(bodyParser({ limit: '50mb' }));
 app.set('port', process.env.PORT || config.port); // Set port to 3000 or the provided PORT variable
 // to connect to mogo database
 

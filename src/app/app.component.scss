@@ -200,8 +200,7 @@
   .subnav-content {
     display: none;
     position: absolute;
-    // left: 0;
-    background-color: red;
+    background-color: #333;
     width: 100%;
     z-index: 1;
   }
@@ -214,6 +213,14 @@
 
   /* When you move the mouse over the subnav container, open the subnav content */
   .subnav:hover .subnav-content {
+    display: block;
+  }
+
+  .subnavbtn:hover .subnav-content {
+    display: block;
+  }
+
+  .subnav-content:hover {
     display: block;
   }
 }
