@@ -64,14 +64,14 @@
   <i class="fa fa-bars my-hamburger"></i>
 
   <div class="mobile-links" id='mobile-links'>
-    <a class="header-search-bar">
+    <div class="header-search-bar mobile-search-bar">
       <div class="input-group">
         <input type="text" name="search" class="form-control" [(ngModel)]="searchTerm" (keyup.enter)="search()">
         <span id="searchBtn" class="bg-warning" (click)="search()">
           <i class="fa fa-search"></i>
         </span>
       </div>
-    </a>
+    </div>
 
     <!-- categories  -->
     <a (click)="collapse()" routerLink="/categories" routerLinkActive="active" class="nav-link">Categories</a>
