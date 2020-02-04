@@ -43,7 +43,6 @@ router.route('/products')
         product.description = req.body.description;
         product.image_name = req.body.product_image_name;
         product.image = result.url;
-        // product.image = result.secure_url;
         product.save();
         res.json({
           success: true,
@@ -81,7 +80,7 @@ router.route('/products/edit')
   .post(checkJWT, (req, res, next) => {
     console.log('edit ', req.body);
 
-    if (Buffer.from(str, 'base64').toString('base64') === str) {
+    if (Buffer.from(str, 'base64').toString('base64') === req.body.product_picture) {
       cloudinary.v2.uploader.upload(req.body.product_picture, function (error, result) {
         try {
           if (error) {
