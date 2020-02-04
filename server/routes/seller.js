@@ -80,7 +80,7 @@ router.route('/products/edit')
   .post(checkJWT, (req, res, next) => {
     console.log('edit ', req.body);
 
-    if (Buffer.from(req.body.product_picture, 'base64').toString('base64') === req.body.product_picture) {
+    if (Buffer.from(req.body.image, 'base64').toString('base64') === req.body.image) {
       cloudinary.v2.uploader.upload(req.body.product_picture, function (error, result) {
         try {
           if (error) {

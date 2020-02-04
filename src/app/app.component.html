@@ -57,9 +57,9 @@
       <span *ngIf="data.cartItems" class="badge badge-warning ml-1">{{ data.cartItems }}</span>
     </a>
   </div>
-
 </div>
 
+<!-- mobile menu -->
 <div href="javascript:void(0);" class="icon" (click)="openMobileMenu()">
   <i class="fa fa-bars my-hamburger"></i>
 
@@ -72,7 +72,30 @@
         </span>
       </div>
     </a>
+
+    <!-- categories  -->
     <a (click)="collapse()" routerLink="/categories" routerLinkActive="active" class="nav-link">Categories</a>
+
+    <!-- Account dropdown  -->
+    <div class="header-account-drop-down">
+      <div class="dropdown">
+        <button class="dropbtn bg-main">Account</button>
+        <div class="dropdown-content form-control">
+          <a *ngIf="token" routerLink="/profile" class="dropdown-item">
+            <i class="fa fa-user-circle" aria-hidden="true"></i> Profile
+          </a>
+          <a *ngIf="!token" routerLink="/login" class="dropdown-item">
+            <i class="fa fa-key" aria-hidden="true"></i> Login
+          </a>
+          <a *ngIf="token" (click)="logout();" class="dropdown-item">
+            <i class="fa fa-key" aria-hidden="true"></i> Logout
+          </a>
+          <a *ngIf="!token" routerLink="/register" class="dropdown-item">
+            <i class="fa fa-group" aria-hidden="true"></i> Register
+          </a>
+        </div>
+      </div>
+    </div>
     <a (click)="collapse()" routerLink="/cart" routerLinkActive="active" class="nav-link">
       <i class="fa fa-shopping-cart mr-1"></i>Cart
       <span *ngIf="data.cartItems" class="badge badge-warning ml-1">{{ data.cartItems }}</span>
