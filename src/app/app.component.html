@@ -77,23 +77,21 @@
     <a (click)="collapse()" routerLink="/categories" routerLinkActive="active" class="nav-link">Categories</a>
 
     <!-- Account dropdown  -->
-    <div class="header-account-drop-down">
-      <div class="dropdown">
-        <button class="dropbtn bg-main">Account</button>
-        <div class="dropdown-content form-control">
-          <a *ngIf="token" routerLink="/profile" class="dropdown-item">
-            <i class="fa fa-user-circle" aria-hidden="true"></i> Profile
-          </a>
-          <a *ngIf="!token" routerLink="/login" class="dropdown-item">
-            <i class="fa fa-key" aria-hidden="true"></i> Login
-          </a>
-          <a *ngIf="token" (click)="logout();" class="dropdown-item">
-            <i class="fa fa-key" aria-hidden="true"></i> Logout
-          </a>
-          <a *ngIf="!token" routerLink="/register" class="dropdown-item">
-            <i class="fa fa-group" aria-hidden="true"></i> Register
-          </a>
-        </div>
+    <div class="subnav">
+      <button class="subnavbtn">Account <i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a *ngIf="token" routerLink="/profile" class="dropdown-item">
+          <i class="fa fa-user-circle" aria-hidden="true"></i> Profile
+        </a>
+        <a *ngIf="!token" routerLink="/login" class="dropdown-item">
+          <i class="fa fa-key" aria-hidden="true"></i> Login
+        </a>
+        <a *ngIf="token" (click)="logout();" class="dropdown-item">
+          <i class="fa fa-key" aria-hidden="true"></i> Logout
+        </a>
+        <a *ngIf="!token" routerLink="/register" class="dropdown-item">
+          <i class="fa fa-group" aria-hidden="true"></i> Register
+        </a>
       </div>
     </div>
     <a (click)="collapse()" routerLink="/cart" routerLinkActive="active" class="nav-link">
