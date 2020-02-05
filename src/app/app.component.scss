@@ -117,6 +117,10 @@
   }
 
   .header-cart {
+    .nav-link {
+      display: flex;
+      flex-wrap: nowrap;
+    }
     align-self: center;
     a {
       @include heder-text();
@@ -173,7 +177,8 @@
   .mobile-links {
     background: dimgrey;
     text-align: end;
-    a, .mobile-search-bar {
+    a,
+    .mobile-search-bar {
       padding: 14px 6px;
       text-decoration: none;
       font-size: 17px;
