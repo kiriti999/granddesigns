@@ -10,10 +10,6 @@
   border-bottom-right-radius: 0.25rem;
 }
 
-#logo {
-  width: 50px;
-}
-
 .lead {
   font-size: 14px;
 }
@@ -28,6 +24,11 @@
 .header {
   display: flex;
   justify-content: space-between;
+
+  .logo {
+    width: 75%;
+  }
+
   .header-logo {
     flex-basis: 20%;
     svg {
@@ -147,7 +148,13 @@
 @media only screen and (max-width: "480px") {
   .header {
     flex-wrap: wrap;
+    .logo {
+      width: 55%;
+      stroke: white;
+      padding-top: 3px;
+    }
     .header-logo {
+      padding-left: 8px;
       flex-basis: 80%;
     }
     .icon {
@@ -164,6 +171,7 @@
       display: block;
       flex-basis: 100%;
       padding: 3px 8px 8px 8px;
+      border-radius: 3px;
     }
   }
 
@@ -193,6 +201,7 @@
     top: 13px;
     color: white;
     padding: 0 15px;
+    font-size: 18px;
   }
 
   /* The subnavigation menu */
