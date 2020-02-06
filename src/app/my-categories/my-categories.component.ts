@@ -4,11 +4,12 @@ import { RestApiService } from '../rest-api.service';
 import { DataService } from '../data.service';
 
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.scss']
+  selector: 'app-my-categories',
+  templateUrl: './my-categories.component.html',
+  styleUrls: ['./my-categories.component.scss']
 })
-export class CategoriesComponent implements OnInit {
+export class MyCategoriesComponent implements OnInit {
+
   categories: any;
 
   newCategory = '';
@@ -48,4 +49,16 @@ export class CategoriesComponent implements OnInit {
     this.btnDisabled = false;
   }
 
+  async deleteCategory(e) {
+    try {
+      const data = await this.rest.get(environment.apiUrl + `/api/categories/delete/?id=${e.target.id}`);
+      // tslint:disable-next-line:max-line-length
+      data['success'] ? this.categories = (this.categories.filter(e => e._id != (data['categories'].id))) : this.data.error(data['message']);
+      console.log('filtered ', this.categories);
+    } catch (error) {
+      this.data.error(error['message']);
+    }
+  }
+
 }
+

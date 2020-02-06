@@ -1,0 +1,10 @@
+.list-group {
+  padding: 0px !important;
+  .flex {
+    display: flex;
+    margin: 2px 0px;
+    .btn-delete {
+      margin: 0px 0px 0px 5px;
+    }
+  }
+}

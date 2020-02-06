@@ -34,7 +34,7 @@ router.get('/products', (req, res, next) => {
   ], function(err, results) {
     var totalProducts = results[0];
     var products = results[1];
-   
+
     res.json({
       success: true,
       message: 'category',
@@ -43,7 +43,7 @@ router.get('/products', (req, res, next) => {
       pages: Math.ceil(totalProducts / perPage)
     });
   });
-  
+
 });
 
 router.route('/categories')
@@ -63,6 +63,21 @@ router.route('/categories')
     res.json({
       success: true,
       message: "Successful"
+    });
+  });
+
+  router.route('/categories/delete')
+  .get(checkJWT, (req, res, next) => {
+    Category.findByIdAndRemove({ _id: req.query.id }, function (err, categories) {
+      if (err) {
+        console.log('error deleting category ', err);
+      } else {
+        res.json({
+          success: true,
+          categories: categories,
+          message: categories !== null ? 'Successfully deleted the category' : 'Category not found'
+        });
+      }
     });
   });
 
@@ -107,7 +122,7 @@ router.route('/categories')
         pages: Math.ceil(totalProducts / perPage)
       });
     });
-    
+
   });
 
   router.get('/product/:id', (req, res, next) => {
@@ -183,7 +198,7 @@ router.post('/payment', checkJWT, (req, res, next) => {
       let order = new Order();
       order.owner = req.decoded.user._id;
       order.totalPrice = currentCharges;
-      
+
       products.map(product => {
         order.products.push({
           product: product.product,
@@ -199,7 +214,7 @@ router.post('/payment', checkJWT, (req, res, next) => {
     });
 });
 
- 
+
 module.exports = router;
 
 

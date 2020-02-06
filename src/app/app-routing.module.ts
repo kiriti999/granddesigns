@@ -1,3 +1,4 @@
+import { MyCategoriesComponent } from './my-categories/my-categories.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -76,6 +77,11 @@ const routes: Routes = [
   {
     path: 'profile/myproducts',
     component: MyProductsComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'profile/myproducts/mycategories',
+    component: MyCategoriesComponent,
     canActivate: [AuthGuardService],
   },
   {
