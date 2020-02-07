@@ -45,9 +45,12 @@ export class MyCategoriesComponent implements OnInit {
         environment.apiUrl + '/api/categories',
         { category: this.newCategory }
       );
-      data['success']
-        ? this.data.success(data['message'])
-        : this.data.error(data['message']);
+      if (data['success']) {
+        this.loadCategories();
+        this.data.success(data['message']);
+      } else {
+        this.data.error(data['message']);
+      }
     } catch (error) {
       this.data.error(error['message']);
     }
