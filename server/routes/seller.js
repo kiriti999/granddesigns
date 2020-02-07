@@ -62,18 +62,36 @@ router.route('/products')
 
 router.route('/products/getById')
   .get(checkJWT, (req, res, next) => {
-    Product.findById({ _id: req.query.id }, function (err, products) {
-      if (err) {
-        console.log('error retrieving product byid ', err);
-      } else {
-        res.json({
-          success: true,
-          products: products,
-          message: products !== null ? 'Successfully retrieved the product by id' : 'Product not found'
-        });
-      }
-    });
+    Product.findById({ _id: req.query.id })
+      .populate('category')
+      .exec((err, products) => {
+        if (err) {
+          console.log('error retrieving product byid ', err);
+        }
+        if (products) {
+          res.json({
+            success: true,
+            message: products !== null ? 'Successfully retrieved the product by id' : 'Product not found',
+            products: products
+          });
+        }
+      });
   });
+
+// router.route('/products/getById')
+//   .get(checkJWT, (req, res, next) => {
+//     Product.findById({ _id: req.query.id }, function (err, products) {
+//       if (err) {
+//         console.log('error retrieving product byid ', err);
+//       } else {
+//         res.json({
+//           success: true,
+//           products: products,
+//           message: products !== null ? 'Successfully retrieved the product by id' : 'Product not found'
+//         });
+//       }
+//     });
+//   });
 
 
 router.route('/products/edit')
