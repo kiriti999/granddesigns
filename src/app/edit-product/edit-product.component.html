@@ -10,7 +10,7 @@
     </div>
     <div class="form-group">
       <label>Category</label>
-      <select name="categoryId" [(ngModel)]="editProduct.categoryId" class="custom-select" required>
+      <select name="categoryId" [(ngModel)]="editProduct.category._id" class="custom-select" required>
         <option *ngFor="let category of categories" [value]="category._id">
           {{ category.name }}
         </option>

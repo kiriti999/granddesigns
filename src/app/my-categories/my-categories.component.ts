@@ -29,7 +29,6 @@ export class MyCategoriesComponent implements OnInit {
       const data = await this.rest.get(
         environment.apiUrl + '/api/categories'
       );
-      console.log('cate', data['sucess']);
       data['success']
         ? (this.categories = data['categories'])
         : this.data.error(data['message']);

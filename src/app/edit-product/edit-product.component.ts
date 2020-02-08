@@ -14,7 +14,9 @@ export class EditProductComponent implements OnInit {
   editProduct = {
     title: '',
     price: 0,
-    categoryId: '',
+    category: {
+      _id: ''
+    },
     description: '',
     product_picture: null,
     product_image_name: ''
@@ -38,8 +40,8 @@ export class EditProductComponent implements OnInit {
   constructor(private data: DataService, private rest: RestApiService, private router: Router, private dataRoute: ActivatedRoute) { }
 
   async ngOnInit() {
-    console.log('dataRoute ', JSON.parse(this.dataRoute.snapshot.params.state));
     this.editProduct = JSON.parse(this.dataRoute.snapshot.params.state);
+    console.log('dataRoute ', JSON.stringify(this.editProduct));
     try {
       const data = await this.rest.get(
         environment.apiUrl + '/api/categories'
@@ -55,7 +57,7 @@ export class EditProductComponent implements OnInit {
   validate(product) {
     if (product.title) {
       if (product.price) {
-        if (product.categoryId) {
+        if (product.category._id) {
           if (product.description) {
             return true;
           } else {
@@ -76,7 +78,7 @@ export class EditProductComponent implements OnInit {
     this.btnDisabled = true;
     try {
       if (this.validate(editProduct)) {
-        console.log('validate ', editProduct);
+        console.log('editProduct ', editProduct);
         const data = await this.rest.post(environment.apiUrl + '/api/seller/products/edit', editProduct);
         if (data['success']) {
           this.router.navigate(['/profile/myproducts'])
