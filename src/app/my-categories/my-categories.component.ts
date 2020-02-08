@@ -66,7 +66,7 @@ export class MyCategoriesComponent implements OnInit {
       const data = await this.rest.get(environment.apiUrl + `/api/categories/delete/?id=${e.target.id}`);
       // tslint:disable-next-line:max-line-length
       if (data['success']) {
-        this.categories = (this.categories.filter((e => e._id != (data['categories'].id)));
+        this.categories = (this.categories.filter((e => e._id != (data['categories'].id))));
         this.loadCategories();
       } else {
         this.data.error(data['message']);
