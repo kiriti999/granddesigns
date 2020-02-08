@@ -29,11 +29,12 @@ export class GlobalService {
   }
 
   cartTotal() {
-    let total = 0;
+    let total: any = 0;
     this.cartItems().forEach((data, index) => {
       total += data['price'] * this.quantities[index];
     });
-    return total;
+    console.log('total', total);
+    return parseInt(total, 10);
   }
 
   validate() {
@@ -61,7 +62,7 @@ export class GlobalService {
     }
     const options: any = {
       'key': 'rzp_live_dARGDqXhaes80z',
-      'amount': this.cartTotal().toFixed(2),
+      'amount': this.cartTotal(),
       'name': 'Grand Designs',
       'description': '',
       'image': './assets/images/logo.png',
