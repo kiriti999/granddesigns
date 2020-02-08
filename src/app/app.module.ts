@@ -29,7 +29,6 @@ import { SearchComponent } from './search/search.component';
 import { CartComponent } from './cart/cart.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { MyCategoriesComponent } from './my-categories/my-categories.component';
-import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 
 @NgModule({
   declarations: [
@@ -49,8 +48,7 @@ import { ShippingAddressComponent } from './shipping-address/shipping-address.co
     SearchComponent,
     CartComponent,
     EditProductComponent,
-    MyCategoriesComponent,
-    ShippingAddressComponent,
+    MyCategoriesComponent
   ],
   imports: [
     BrowserModule,

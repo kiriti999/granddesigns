@@ -24,12 +24,12 @@ export class ProductComponent implements OnInit {
     private data: DataService,
     private rest: RestApiService,
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(res => {
       this.rest
-        .get(environment.apiUrl+`/api/product/${res['id']}`)
+        .get(environment.apiUrl + `/api/product/${res['id']}`)
         .then(data => {
           data['success']
             ? (this.product = data['product'])
@@ -48,7 +48,7 @@ export class ProductComponent implements OnInit {
   async postReview() {
     this.btnDisabled = true;
     try {
-      const data = await this.rest.post(environment.apiUrl+'/api/review', {
+      const data = await this.rest.post(environment.apiUrl + '/api/review', {
         productId: this.product._id,
         title: this.myReview.title,
         description: this.myReview.description,
