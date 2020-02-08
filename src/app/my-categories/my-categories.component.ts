@@ -98,5 +98,9 @@ export class MyCategoriesComponent implements OnInit {
     }
     this.btnDisabled = false;
   }
+
+  cancelEdit() {
+    this.editMode = false;
+  }
 }
 
