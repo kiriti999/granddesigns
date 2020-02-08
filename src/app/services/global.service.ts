@@ -61,7 +61,7 @@ export class GlobalService {
       user = data['user'];
     }
     const options: any = {
-      'key': 'rzp_live_dARGDqXhaes80z',
+      'key': 'rzp_live_NXdoyPM0snarAK',
       'amount': this.cartTotal() * 100,
       'name': 'Grand Designs',
       'description': '',
