@@ -100,6 +100,6 @@ export class AddressComponent implements OnInit {
   }
 
   checkout() {
-    this.globalService.checkout();
+    this.globalService.checkout(this.currentAddress);
   }
 }

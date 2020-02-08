@@ -3,6 +3,7 @@ import { DataService } from '../data.service';
 import { RestApiService } from '../rest-api.service';
 import { Router } from '@angular/router';
 import { WindowRef } from '../windowRef.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -52,29 +53,33 @@ export class GlobalService {
     }
   }
 
-  checkout() {
+  async checkout(address) {
+    let user;
+    if (localStorage.getItem('token')) {
+      const data = await this.rest.get(environment.apiUrl + '/api/accounts/profile');
+      user = data['user'];
+    }
     const options: any = {
       'key': 'rzp_live_dARGDqXhaes80z',
-      'amount': 100,
-      'name': 'Company Name',
-      'description': 'dummy data',
+      'amount': this.cartTotal().toFixed(2),
+      'name': 'Grand Designs',
+      'description': '',
       'image': './assets/images/logo.png',
       'modal': {
         'escape': false
       },
       'prefill': {
-        'name': 'kiriti',
-        'contact': 'phone',
-        'email': 'email',
+        'name': user.name,
+        'contact': '+91' + user.address.mobile,
+        'email': user.email,
         'method': 'card',
         'card[number]': '',
         'card[expiry]': '',
-        'card[cvv]': 'cardCvv'
+        'card[cvv]': ''
       },
       'notes': {
         // tslint:disable-next-line:max-line-length
-        // 'address': addressDetail.address + ', ' + addressDetail.landmark + ', ' + addressDetail.city + ', ' + addressDetail.state + '-' + addressDetail.pincode
-        'address': ''
+        'address': address.addr1 + ', ' + address.addr1 + ', ' + address.city + ', ' + address.state + '-' + address.postalCode + '-' + address.mobile
       },
       'theme': {
         'color': '#6fbc29'
