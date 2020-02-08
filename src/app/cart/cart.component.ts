@@ -20,7 +20,7 @@ export class CartComponent implements OnInit {
     private data: DataService,
     private rest: RestApiService,
     private router: Router,
-  ) {}
+  ) { }
 
   trackByCartItems(index: number, item: any) {
     return item._id;
@@ -116,4 +116,10 @@ export class CartComponent implements OnInit {
       this.data.error(error);
     }
   }
+
+  goToAddressPage() {
+    // tslint:disable-next-line:max-line-length
+    this.router.navigate(['/profile/address', { state: JSON.stringify({ checkoutButton: true, quantities: this.quantities }) }]);
+  }
+
 }

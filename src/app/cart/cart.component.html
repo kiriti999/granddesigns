@@ -57,7 +57,9 @@
               <span class="ml-1 font-weight-bold text-danger">{{ cartTotal | currency }}</span>
             </h5>
             <br>
-            <button class="btn btn-warning btn-block" (click)="checkout()" [disabled]="btnDisabled">Checkout</button>
+            <!-- <button class="btn btn-warning btn-block" (click)="checkout()" [disabled]="btnDisabled">Checkout</button> -->
+            <button class="btn btn-warning btn-block" (click)='goToAddressPage()'
+              [disabled]="btnDisabled">Checkout</button>
           </div>
         </div>
       </div>

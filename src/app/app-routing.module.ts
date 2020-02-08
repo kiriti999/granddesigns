@@ -70,6 +70,11 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
+    path: 'profile/address/:checkout',
+    component: AddressComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
     path: 'profile/postproduct',
     component: PostProductComponent,
     canActivate: [AuthGuardService],

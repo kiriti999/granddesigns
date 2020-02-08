@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -29,6 +29,7 @@ import { SearchComponent } from './search/search.component';
 import { CartComponent } from './cart/cart.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { MyCategoriesComponent } from './my-categories/my-categories.component';
+import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 
 @NgModule({
   declarations: [
@@ -49,15 +50,17 @@ import { MyCategoriesComponent } from './my-categories/my-categories.component';
     CartComponent,
     EditProductComponent,
     MyCategoriesComponent,
+    ShippingAddressComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule.forRoot(),
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
   ],
   providers: [RestApiService, DataService, AuthGuardService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
