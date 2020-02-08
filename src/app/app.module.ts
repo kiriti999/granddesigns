@@ -54,7 +54,7 @@ import { WindowRef } from './windowRef.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule.forRoot(),
+    NgbModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
