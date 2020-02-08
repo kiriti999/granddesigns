@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { DataService } from '../data.service';
 import { RestApiService } from '../rest-api.service';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { WindowRef } from '../windowRef.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,8 @@ export class GlobalService {
   handler: any;
   quantities = [];
 
-
   constructor(
+    private winRef: WindowRef,
     private data: DataService,
     private rest: RestApiService,
     private router: Router
@@ -23,42 +23,7 @@ export class GlobalService {
     });
   }
 
-  enableStripe() {
-    this.handler = StripeCheckout.configure({
-      key: environment.stripeKey,
-      image: 'assets/img/logo.png',
-      locale: 'auto',
-      token: async stripeToken => {
-        let products;
-        products = [];
-        this.cartItems.forEach((d, index) => {
-          products.push({
-            product: d['_id'],
-            quantity: this.quantities[index],
-          });
-        });
-
-        try {
-          const data = await this.rest.post(
-            environment.apiUrl + '/api/payment',
-            {
-              totalPrice: this.cartTotal,
-              products,
-              stripeToken,
-            },
-          );
-          data['success']
-            ? (this.data.clearCart(), this.data.success('Purchase Successful.'))
-            : this.data.error(data['message']);
-        } catch (error) {
-          this.data.error(error['message']);
-        }
-      },
-    });
-  }
-
   cartItems() {
-    console.log('this.data.getCart() ', this.data.getCart());
     return this.data.getCart();
   }
 
@@ -88,18 +53,41 @@ export class GlobalService {
   }
 
   checkout() {
-    try {
-      if (this.validate()) {
-        this.handler.open({
-          name: 'Grand Designs',
-          description: 'Checkout Payment',
-          amount: this.cartTotal() * 100,
-          closed: () => { },
-        });
-      } else {
+    const options: any = {
+      'key': 'rzp_live_dARGDqXhaes80z',
+      'amount': 100,
+      'name': 'Company Name',
+      'description': 'dummy data',
+      'image': './assets/images/logo.png',
+      'modal': {
+        'escape': false
+      },
+      'prefill': {
+        'name': 'kiriti',
+        'contact': 'phone',
+        'email': 'email',
+        'method': 'card',
+        'card[number]': '',
+        'card[expiry]': '',
+        'card[cvv]': 'cardCvv'
+      },
+      'notes': {
+        // tslint:disable-next-line:max-line-length
+        // 'address': addressDetail.address + ', ' + addressDetail.landmark + ', ' + addressDetail.city + ', ' + addressDetail.state + '-' + addressDetail.pincode
+        'address': ''
+      },
+      'theme': {
+        'color': '#6fbc29'
       }
-    } catch (error) {
-      this.data.error(error);
-    }
+    };
+    // options.handler = ((response) => {
+    //   options['payment_response_id'] = response.razorpay_payment_id;
+    //   this.paymentService.payWithRazor({ cart: {}, payment: options });
+    // });
+    // options.modal.ondismiss = (() => {
+    //   this.loginService.SetLoader = false;
+    // });
+    const rzp = new this.winRef.nativeWindow.Razorpay(options);
+    rzp.open();
   }
 }

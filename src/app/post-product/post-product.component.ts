@@ -68,7 +68,6 @@ export class PostProductComponent implements OnInit {
 
   fileChange(event: any) {
 
-    console.log('File API supported.!');
     const self = this;
     const file = event.target.files[0];
 
@@ -92,7 +91,6 @@ export class PostProductComponent implements OnInit {
     this.btnDisabled = true;
     try {
       if (this.validate(this.product)) {
-        console.log('product ', this.product);
         const data = await this.rest.post(
           environment.apiUrl + '/api/seller/products',
           this.product

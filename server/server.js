@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const config = require('./config');
+// const Razorpay = require('razorpay');
 
 const app = express();
 app.use(bodyParser({ limit: '50mb' }));

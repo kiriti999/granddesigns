@@ -29,7 +29,6 @@ export class MyProductsComponent implements OnInit {
   async ngOnInit() {
     try {
       const data = await this.rest.get(environment.apiUrl + '/api/seller/products');
-      console.log('data ', data);
       data['success'] ? (this.products = data['products']) : this.data.error(data['message']);
     } catch (error) {
       this.data.error(error['message']);
@@ -40,7 +39,6 @@ export class MyProductsComponent implements OnInit {
     try {
       const data = await this.rest.get(environment.apiUrl + `/api/seller/products/delete/?id=${e.target.id}`);
       data['success'] ? this.products = (this.products.filter(e => e._id != (data['products'].id))) : this.data.error(data['message']);
-      console.log('filtered ', this.products);
     } catch (error) {
       this.data.error(error['message']);
     }
@@ -49,7 +47,6 @@ export class MyProductsComponent implements OnInit {
   async getById(e) {
     try {
       const data = await this.rest.get(environment.apiUrl + `/api/seller/products/getById/?id=${e.target.id}`);
-      console.log('getById ', data);
       if (data['success']) {
         this.router.navigate(['/profile/myproducts/edit', { state: JSON.stringify(data['products']) }]);
       } else {

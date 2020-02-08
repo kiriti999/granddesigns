@@ -29,6 +29,7 @@ import { SearchComponent } from './search/search.component';
 import { CartComponent } from './cart/cart.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { MyCategoriesComponent } from './my-categories/my-categories.component';
+import { WindowRef } from './windowRef.service';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,7 @@ import { MyCategoriesComponent } from './my-categories/my-categories.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [RestApiService, DataService, AuthGuardService],
+  providers: [RestApiService, DataService, AuthGuardService, WindowRef],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

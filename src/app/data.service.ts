@@ -40,7 +40,6 @@ export class DataService {
       if (localStorage.getItem('token')) {
         const data = await this.rest.get(environment.apiUrl + '/api/accounts/profile');
         this.user = data['user'];
-        console.log(this.user);
       }
     } catch (e) {
       this.error(e);

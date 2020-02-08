@@ -28,14 +28,10 @@ export class AddressComponent implements OnInit {
   }
 
   async ngOnInit() {
-
-    this.handler = this.globalService.enableStripe();
-
     this.shippingForm.disable();
     if (this.dataRoute.snapshot.params.state) {
       const routeData = JSON.parse(this.dataRoute.snapshot.params.state);
       this.checkoutButton = routeData.checkoutButton;
-      // this.globalService.quantities = routeData.quantites;
     } else {
       this.shippingForm.enable();
     }
@@ -89,7 +85,6 @@ export class AddressComponent implements OnInit {
   }
 
   async updateAddress() {
-    console.log('this.currentAddress ', this.currentAddress);
     try {
       const res = await this.rest.post(
         environment.apiUrl + '/api/accounts/address',

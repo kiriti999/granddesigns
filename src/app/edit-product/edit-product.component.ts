@@ -41,7 +41,6 @@ export class EditProductComponent implements OnInit {
 
   async ngOnInit() {
     this.editProduct = JSON.parse(this.dataRoute.snapshot.params.state);
-    console.log('dataRoute ', JSON.stringify(this.editProduct));
     try {
       const data = await this.rest.get(
         environment.apiUrl + '/api/categories'
@@ -78,7 +77,6 @@ export class EditProductComponent implements OnInit {
     this.btnDisabled = true;
     try {
       if (this.validate(editProduct)) {
-        console.log('editProduct ', editProduct);
         const data = await this.rest.post(environment.apiUrl + '/api/seller/products/edit', editProduct);
         if (data['success']) {
           this.router.navigate(['/profile/myproducts'])
@@ -98,7 +96,6 @@ export class EditProductComponent implements OnInit {
 
   fileChange(event: any) {
 
-    console.log('File API supported.!');
     const self = this;
     const file = event.target.files[0];
 

@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
   }
 
   async login() {
-    console.log('login called');
     this.btnDisabled = true;
     try {
       if (this.validate()) {

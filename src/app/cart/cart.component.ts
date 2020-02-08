@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
+import { WindowRef } from '../windowRef.service';
 
 @Component({
   selector: 'app-cart',
@@ -11,11 +12,11 @@ import { Router } from '@angular/router';
 })
 export class CartComponent implements OnInit {
   btnDisabled = false;
-  handler: any;
 
   quantities = [];
 
   constructor(
+
     private data: DataService,
     private router: Router,
     private globalService: GlobalService
@@ -46,7 +47,6 @@ export class CartComponent implements OnInit {
     this.globalService.cartItems().forEach(data => {
       this.quantities.push(1);
     });
-    this.handler = this.globalService.enableStripe();
   }
 
 
