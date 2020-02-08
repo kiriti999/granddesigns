@@ -34,7 +34,7 @@ export class GlobalService {
       total += data['price'] * this.quantities[index];
     });
     console.log('total', total);
-    return parseInt(total, 10);
+    return total;
   }
 
   validate() {
@@ -62,7 +62,7 @@ export class GlobalService {
     }
     const options: any = {
       'key': 'rzp_live_dARGDqXhaes80z',
-      'amount': this.cartTotal(),
+      'amount': this.cartTotal() * 100,
       'name': 'Grand Designs',
       'description': '',
       'image': './assets/images/logo.png',

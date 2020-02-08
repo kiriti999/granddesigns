@@ -49,11 +49,6 @@ export class CartComponent implements OnInit {
     });
   }
 
-
-  checkout() {
-    this.globalService.checkout();
-  }
-
   goToAddressPage() {
     // tslint:disable-next-line:max-line-length
     this.router.navigate(['/profile/address', { state: JSON.stringify({ checkoutButton: true, quantities: this.quantities }) }]);
