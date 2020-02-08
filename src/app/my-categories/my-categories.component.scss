@@ -5,7 +5,8 @@
     }
     display: flex;
     margin: 2px 0px;
-    .btn-delete {
+    .btn-save, .btn-delete,
+    .btn-edit {
       margin: 0px 0px 0px 5px;
     }
   }

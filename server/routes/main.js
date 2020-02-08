@@ -14,24 +14,24 @@ router.get('/products', (req, res, next) => {
   const perPage = 10;
   const page = req.query.page;
   async.parallel([
-    function(callback) {
+    function (callback) {
       Product.count({}, (err, count) => {
         var totalProducts = count;
         callback(err, totalProducts);
       });
     },
-    function(callback) {
+    function (callback) {
       Product.find({})
         .skip(perPage * page)
         .limit(perPage)
         .populate('category')
         .populate('owner')
         .exec((err, products) => {
-          if(err) return next(err);
+          if (err) return next(err);
           callback(err, products);
         });
     }
-  ], function(err, results) {
+  ], function (err, results) {
     var totalProducts = results[0];
     var products = results[1];
 
@@ -66,7 +66,22 @@ router.route('/categories')
     });
   });
 
-  router.route('/categories/delete')
+router.route('/categories/edit')
+  .post(checkJWT, (req, res, next) => {
+    Category.findByIdAndUpdate(req.body.id, req.body, { new: true }, function (err, categories) {
+      if (err) {
+        console.log('error edit category ', err);
+      } else {
+        res.json({
+          success: true,
+          categories: categories,
+          message: categories !== null ? 'Successfully edited the category' : 'Category not found'
+        });
+      }
+    });
+  });
+
+router.route('/categories/delete')
   .get(checkJWT, (req, res, next) => {
     Category.findByIdAndRemove({ _id: req.query.id }, function (err, categories) {
       if (err) {
@@ -82,99 +97,99 @@ router.route('/categories')
   });
 
 
-  router.get('/categories/:id', (req, res, next) => {
-    const perPage = 10;
-    const page = req.query.page;
-    async.parallel([
-      function(callback) {
-        Product.count({ category: req.params.id }, (err, count) => {
-          var totalProducts = count;
-          callback(err, totalProducts);
-        });
-      },
-      function(callback) {
-        Product.find({ category: req.params.id })
-          .skip(perPage * page)
-          .limit(perPage)
-          .populate('category')
-          .populate('owner')
-          .populate('reviews')
-          .exec((err, products) => {
-            if(err) return next(err);
-            callback(err, products);
-          });
-      },
-      function(callback) {
-        Category.findOne({ _id: req.params.id }, (err, category) => {
-         callback(err, category)
-        });
-      }
-    ], function(err, results) {
-      var totalProducts = results[0];
-      var products = results[1];
-      var category = results[2];
-      res.json({
-        success: true,
-        message: 'category',
-        products: products,
-        categoryName: category.name,
-        totalProducts: totalProducts,
-        pages: Math.ceil(totalProducts / perPage)
+router.get('/categories/:id', (req, res, next) => {
+  const perPage = 10;
+  const page = req.query.page;
+  async.parallel([
+    function (callback) {
+      Product.count({ category: req.params.id }, (err, count) => {
+        var totalProducts = count;
+        callback(err, totalProducts);
       });
+    },
+    function (callback) {
+      Product.find({ category: req.params.id })
+        .skip(perPage * page)
+        .limit(perPage)
+        .populate('category')
+        .populate('owner')
+        .populate('reviews')
+        .exec((err, products) => {
+          if (err) return next(err);
+          callback(err, products);
+        });
+    },
+    function (callback) {
+      Category.findOne({ _id: req.params.id }, (err, category) => {
+        callback(err, category)
+      });
+    }
+  ], function (err, results) {
+    var totalProducts = results[0];
+    var products = results[1];
+    var category = results[2];
+    res.json({
+      success: true,
+      message: 'category',
+      products: products,
+      categoryName: category.name,
+      totalProducts: totalProducts,
+      pages: Math.ceil(totalProducts / perPage)
     });
-
   });
 
-  router.get('/product/:id', (req, res, next) => {
-    Product.findById({ _id: req.params.id })
-      .populate('category')
-      .populate('owner')
-      .deepPopulate('reviews.owner')
-      .exec((err, product) => {
-        if (err) {
+});
+
+router.get('/product/:id', (req, res, next) => {
+  Product.findById({ _id: req.params.id })
+    .populate('category')
+    .populate('owner')
+    .deepPopulate('reviews.owner')
+    .exec((err, product) => {
+      if (err) {
+        res.json({
+          success: false,
+          message: 'Product is not found'
+        });
+      } else {
+        if (product) {
           res.json({
-            success: false,
-            message: 'Product is not found'
+            success: true,
+            product: product
           });
-        } else {
-          if (product) {
-            res.json({
-              success: true,
-              product: product
-            });
-          }
+        }
+      }
+    });
+});
+
+
+router.post('/review', checkJWT, (req, res, next) => {
+  async.waterfall([
+    function (callback) {
+      Product.findOne({ _id: req.body.productId }, (err, product) => {
+        if (product) {
+          callback(err, product);
         }
       });
-  });
+    },
+    function (product) {
+      let review = new Review();
+      review.owner = req.decoded.user._id;
 
+      if (req.body.title) review.title = req.body.title;
+      if (req.body.description) review.description = req.body.description
+      review.rating = req.body.rating;
 
-  router.post('/review', checkJWT, (req, res, next) => {
-    async.waterfall([
-      function(callback) {
-        Product.findOne({ _id: req.body.productId}, (err, product) => {
-          if (product) {
-            callback(err, product);
-          }
-        });
-      },
-      function(product) {
-        let review = new Review();
-        review.owner = req.decoded.user._id;
-
-        if (req.body.title) review.title = req.body.title;
-        if (req.body.description) review.description = req.body.description
-        review.rating = req.body.rating;
-
-        product.reviews.push(review._id);
-        product.save();
-        review.save();
-        res.json({
-          success: true,
-          message: "Successfully added the review"
-        });
-      }
-    ]);
-  });
+      product.reviews.push(review._id);
+      product.save();
+      review.save();
+      res.json({
+        success: true,
+        message: "Successfully added the review"
+      });
+    }
+  ]);
+});
 
 
 router.post('/payment', checkJWT, (req, res, next) => {
@@ -185,14 +200,14 @@ router.post('/payment', checkJWT, (req, res, next) => {
     .create({
       source: stripeToken.id
     })
-    .then(function(customer) {
+    .then(function (customer) {
       return stripe.charges.create({
         amount: currentCharges,
         currency: 'usd',
         customer: customer.id
       });
     })
-    .then(function(charge) {
+    .then(function (charge) {
       const products = req.body.products;
 
       let order = new Order();

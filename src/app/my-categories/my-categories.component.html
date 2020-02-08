@@ -2,20 +2,22 @@
   <div class="container p-5">
     <app-message></app-message>
     <h4 class="display-4">Categories</h4>
-    <hr>
     <div *ngIf="!categories" class="m-auto">
-      <h1 class="text-center display-3 mt-5">
+      <h2 class="text-center display-3 mt-5">
         <i class="fa fa-spinner fa-spin"></i>
-      </h1>
+      </h2>
     </div>
     <div *ngIf="categories" class="list-group">
       <div *ngFor="let category of categories" class="flex">
-        <a routerLink="/categories/{{ category._id }}" class="list-group-item list-group-item-action">
+        <a routerLink="/categories/{{ category._id }}" class="list-group-item list-group-item-action" *ngIf="!editMode">
           {{ category.name }}
         </a>
-        <button class="btn btn-sm btn-info" id="{{category._id}}"(click)="editName()" >Edit Name <i class="fa fa-edit"></i></button>
-        <button class="btn btn-sm btn-info btn-delete" id="{{category._id}}" (click)="deleteCategory($event)">Delete Category <i
-            class="fa fa-trash" aria-hidden="true"></i></button>
+        <input [(ngModel)]="category.name" *ngIf="editMode" />
+        <button class="btn btn-sm btn-info btn-edit" *ngIf="!editMode" id="{{category._id}}"
+          (click)="editName(category.name)">Edit Name <i class="fa fa-edit"></i></button>
+        <button *ngIf="editMode" class="btn btn-sm btn-info btn-save" (click)="saveEdit($event, category)">Save</button>
+        <!-- <button class="btn btn-sm btn-info btn-delete" id="{{category._id}}" (click)="deleteCategory($event)">Delete
+          Category <i class="fa fa-trash" aria-hidden="true"></i></button> -->
       </div>
     </div>
   </div>

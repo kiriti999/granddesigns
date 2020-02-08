@@ -10,10 +10,15 @@ import { DataService } from '../data.service';
 })
 export class MyCategoriesComponent implements OnInit {
 
+  // category = {
+  //   name: ''
+  // };
+
   categories: any;
 
   newCategory = '';
   btnDisabled = false;
+  editMode = false;
 
   constructor(
     private data: DataService,
@@ -74,8 +79,24 @@ export class MyCategoriesComponent implements OnInit {
   }
 
   editName() {
-
+    this.editMode = true;
   }
 
+  async saveEdit(e, category) {
+    console.log('edit category ', category);
+    this.btnDisabled = true;
+    try {
+      const data = await this.rest.post(environment.apiUrl + '/api/categories/edit', category);
+      if (data['success']) {
+        this.editMode = false;
+        this.loadCategories();
+      } else {
+        this.data.error(data['message']);
+      }
+    } catch (error) {
+      this.data.error(error['message']);
+    }
+    this.btnDisabled = false;
+  }
 }
 
