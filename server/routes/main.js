@@ -68,7 +68,7 @@ router.route('/categories')
 
 router.route('/categories/edit')
   .post(checkJWT, (req, res, next) => {
-    Category.findByIdAndUpdate(req.body.id, req.body, { new: true }, function (err, categories) {
+    Category.findByIdAndUpdate(req.body._id, req.body, { new: true }, function (err, categories) {
       if (err) {
         console.log('error edit category ', err);
       } else {
