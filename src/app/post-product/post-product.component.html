@@ -36,7 +36,8 @@
             <label>Upload Image</label>
             <input type="file" class="form-control-file" accept="image/*" name="file" (change)="fileChange($event)">
           </div>
-          <button type="button" class="btn btn-success" (click)="post()" [disabled]="btnDisabled">Post</button>
+          <button type="button" class="btn btn-success post-product" (click)="post()"
+            [disabled]="btnDisabled">Post</button>
         </form>
       </div>
     </div>

@@ -34,8 +34,8 @@
           <div class="card bg-light">
             <img src="{{ product.image }}" alt="product" class="card-img-top">
             <div class="card-body">
-              <h5 class="card-title">{{ product.title }}</h5>
-              <p class="card-text">{{ product.price | currency : 'INR' }}</p>
+              <h5 class="card-title product-title">{{ product.title }}</h5>
+              <p class="card-text product-price">{{ product.price | currency : 'INR' }}</p>
             </div>
           </div>
         </a>
