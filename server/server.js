@@ -24,7 +24,7 @@ mongoose.connect(config.database, { useMongoClient: true }, err => {
 });
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(cors());
 
