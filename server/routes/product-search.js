@@ -4,16 +4,21 @@ const algoliasearch = require('algoliasearch');
 const client = algoliasearch('9SA5PPC1N4', 'd0cd66994c1b2a3fbec69d0679914209');
 const index = client.initIndex('gdesigns');
 
-index.setSettings({
-  searchableAttributes: [
-    'body_html',
-    'options',
-    'tags',
-    'title',
-    'variant_title'
-  ],
-  customRanking: ['desc(popularity)'],
-});
+const objects = [
+  {
+    objectID: 1,
+    name: "silk"
+  }
+];
+
+index
+  .saveObjects(objects)
+  .then(({ objectIDs }) => {
+    console.log(objectIDs);
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
 router.get('/', (req, res, next) => {
   if (req.query.query) {
