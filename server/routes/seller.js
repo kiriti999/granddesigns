@@ -4,7 +4,8 @@ const checkJWT = require('../middlewares/check-jwt');
 const cloudinary = require('cloudinary');
 const algoliasearch = require('algoliasearch');
 // const client = algoliasearch('9SA5PPC1N4', 'd0cd66994c1b2a3fbec69d0679914209');
-const client = algoliasearch('9SA5PPC1N4', '183f7ddb740690df8b6fe7cd82008198');
+// const client = algoliasearch('9SA5PPC1N4', '183f7ddb740690df8b6fe7cd82008198');
+const client = algoliasearch('R8SOPXU9JW', '624dc570f96e5305a9ddb768e413cfd4');
 const index = client.initIndex('gdesigns');
 
 cloudinary.config({
