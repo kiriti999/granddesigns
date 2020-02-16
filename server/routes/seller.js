@@ -3,7 +3,8 @@ const Product = require('../models/product');
 const checkJWT = require('../middlewares/check-jwt');
 const cloudinary = require('cloudinary');
 const algoliasearch = require('algoliasearch');
-const client = algoliasearch('9SA5PPC1N4', 'd0cd66994c1b2a3fbec69d0679914209');
+// const client = algoliasearch('9SA5PPC1N4', 'd0cd66994c1b2a3fbec69d0679914209');
+const client = algoliasearch('9SA5PPC1N4', '183f7ddb740690df8b6fe7cd82008198');
 const index = client.initIndex('gdesigns');
 
 cloudinary.config({
