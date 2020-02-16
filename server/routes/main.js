@@ -1,7 +1,5 @@
 const router = require('express').Router();
 const async = require('async');
-const stripe = require('stripe')('sk_test_JF4CoY7UAKFnkwzNgh1NtXDV');
-
 
 const Category = require('../models/category');
 const Product = require('../models/product');

@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 # granddesigns
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.7.
+Amazon like website created using [Angular CLI](https://github.com/angular/angular-cli) version 6.0.7 and node, express, mongo and deployed on heroku cloud.
 
 ## Development server
 
@@ -28,4 +27,3 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 =======
 # grandesigns
->>>>>>> 55cbb7877c1d18491e294b0c0fcbdb2960aa1d16

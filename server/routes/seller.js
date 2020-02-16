@@ -2,6 +2,9 @@ const router = require('express').Router();
 const Product = require('../models/product');
 const checkJWT = require('../middlewares/check-jwt');
 const cloudinary = require('cloudinary');
+const algoliasearch = require('algoliasearch');
+const client = algoliasearch('9SA5PPC1N4', 'd0cd66994c1b2a3fbec69d0679914209');
+const index = client.initIndex('gdesigns');
 
 cloudinary.config({
   cloud_name: 'gdesigns',
@@ -43,6 +46,14 @@ router.route('/products')
         product.description = req.body.description;
         product.image_name = req.body.product_image_name;
         product.image = result.url;
+
+        index.saveObject(product).then(({ objectIds }) => {
+          console.log('object ids ', objectIds);
+        })
+          .catch(err => {
+            console.log('err', err);
+          })
+
         product.save();
         res.json({
           success: true,
