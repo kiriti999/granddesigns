@@ -2,24 +2,9 @@ const router = require('express').Router();
 
 const algoliasearch = require('algoliasearch');
 // const client = algoliasearch('9SA5PPC1N4', 'd0cd66994c1b2a3fbec69d0679914209');
-const client = algoliasearch('9SA5PPC1N4', '183f7ddb740690df8b6fe7cd82008198');
-const index = client.initIndex('gdesigns');
+const client = algoliasearch('R8SOPXU9JW', 'bb6a60bceaea8b6e27b94b58d5d12991');
+const index = client.initIndex('gdesign');
 
-const objects = [
-  {
-    objectID: 1,
-    name: "silk"
-  }
-];
-
-index
-  .saveObjects(objects)
-  .then(({ objectIDs }) => {
-    console.log(objectIDs);
-  })
-  .catch(err => {
-    console.log(err);
-  });
 
 router.get('/', (req, res, next) => {
   if (req.query.query) {

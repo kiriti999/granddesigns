@@ -26,7 +26,7 @@
                   <a routerLink="/product/{{ product.objectID }}">{{ product.title }}</a>
                 </h5>
                 <p>
-                  <small>by {{ product.owner.name }}</small>
+                  <!-- <small>by {{ product.owner.name }}</small> -->
                 </p>
                 <p>{{ product.price | currency : 'INR' }}</p>
               </div>
@@ -38,7 +38,8 @@
         </div>
         <hr>
       </div>
-      <ngb-pagination [collectionSize]="content.nbHits" [pageSize]="20" [(page)]="page" (pageChange)="getProducts()"></ngb-pagination>
+      <ngb-pagination [collectionSize]="content.nbHits" [pageSize]="20" [(page)]="page" (pageChange)="getProducts()">
+      </ngb-pagination>
     </div>
   </div>
 </section>

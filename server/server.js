@@ -13,15 +13,19 @@ app.use(bodyParser({ limit: '50mb' }));
 app.set('port', process.env.PORT || config.port); // Set port to 3000 or the provided PORT variable
 // to connect to mogo database
 
-// Only include useMongoClient only if your mongoose version is < 5.0.0
-mongoose.connect(config.database, { useMongoClient: true }, err => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('app port', app.get('port'));
-    console.log('Connected to the database');
-  }
+mongoose.connect(config.database, { autoIndex: false }, () => {
+  console.log('connected to mongodb');
 });
+
+// Only include useMongoClient only if your mongoose version is < 5.0.0
+// mongoose.connect(config.database, { useMongoClient: true }, err => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log('app port', app.get('port'));
+//     console.log('Connected to the database');
+//   }
+// });
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

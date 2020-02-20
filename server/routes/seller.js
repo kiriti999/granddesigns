@@ -31,7 +31,6 @@ router.route('/products')
       });
   })
   .post(checkJWT, (req, res, next) => {
-    console.log('req.body ', req.body);
     console.log('-----------------------');
 
     cloudinary.v2.uploader.upload(req.body.product_picture, function (error, result) {
@@ -39,7 +38,6 @@ router.route('/products')
         if (error) {
           throw error;
         }
-        console.log('cloudinary result ', result);
         let product = new Product();
         product.owner = req.decoded.user._id;
         product.category = req.body.categoryId;
@@ -49,14 +47,36 @@ router.route('/products')
         product.image_name = req.body.product_image_name;
         product.image = result.url;
 
-        index.saveObject(product).then(({ objectIds }) => {
-          console.log('object ids ', objectIds);
-        })
-          .catch(err => {
-            console.log('err', err);
-          })
 
-        product.save();
+
+
+        product.save((err, savedProduct) => {
+          console.log('saved product ', savedProduct.toObject());
+          console.log('saved product ', savedProduct.toObject());
+          console.log('saved product ', savedProduct.toObject());
+
+          const prod = savedProduct.toObject();
+
+          const algoliaObject = {
+            ObjectID: prod.id,
+            name: prod.name,
+            price: prod.price,
+            title: prod.title,
+            category: prod.category,
+            description: prod.description,
+            image: prod.image,
+            created: prod.created,
+            reviews: prod.reviews,
+          }
+
+          index.saveObject(algoliaObject).then(({ objectIds }) => {
+            console.log('object ids ', objectIds);
+          })
+            .catch(err => {
+              console.log('err', err);
+            })
+        });
+
         res.json({
           success: true,
           message: 'Successfully Added the product'
@@ -68,7 +88,7 @@ router.route('/products')
         })
       }
 
-      console.log(result, error);
+      console.log(error);
     });
 
   });
@@ -103,7 +123,6 @@ router.route('/products/edit')
           if (error) {
             throw error;
           }
-          console.log('cloudinary edit result ', result);
 
           const editProduct = {
             image: result.url,
@@ -134,7 +153,7 @@ router.route('/products/edit')
             message: 'Unable to save image to cloudinary'
           })
         }
-        console.log(result, error);
+        console.log(error);
       });
     } else {
       Product.findByIdAndUpdate(req.body.id, req.body, { new: true }, function (err, products) {
